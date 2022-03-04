@@ -37,9 +37,9 @@
     <br />
     <a href="https://snippet-management.herokuapp.com/">Active website</a>
     ·
-    <a href="https://github.com/Snippet-Management/Snippet-Frontend/labels/bug">Report Bug</a>
+    <a href="https://github.com/Glucemy/glucemy-front/labels/bug">Report Bug</a>
     ·
-    <a href="https://github.com/Snippet-Management/Snippet-Frontend/labels/enhancement">Request Feature</a>
+    <a href="https://github.com/Glucemy/Glucemy-front/labels/enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -71,7 +71,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Snippets is an open source application, aiming to provide optimized and reusable code for the users.
+Glucemy is an open source application, aiming to provide optimized and reusable code for the users.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -170,7 +170,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Organization Link: 
-- [Snippet Management](https://github.com/Snippet-Management)
+- [Glucemy Management](https://github.com/Glucemy)
 
 LinkedIn:
 - [Aitor Lería](https://es.linkedin.com/in/aitorleria)
@@ -181,14 +181,14 @@ LinkedIn:
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Adrian-2316/Snippet-Management.svg?style=for-the-badge
-[contributors-url]: https://github.com/Adrian-2316/Snippet-Management/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Adrian-2316/Snippet-Management.svg?style=for-the-badge
-[forks-url]: https://github.com/Adrian-2316/Snippet-Management/network/members
-[stars-shield]: https://img.shields.io/github/stars/Adrian-2316/Snippet-Management.svg?style=for-the-badge
-[stars-url]: https://github.com/Adrian-2316/Snippet-Management/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Adrian-2316/Snippet-Management.svg?style=for-the-badge
-[issues-url]: https://github.com/Adrian-2316/Snippet-Management/issues
-[license-shield]: https://img.shields.io/github/license/Adrian-2316/Snippet-Management.svg?style=for-the-badge
-[license-url]: https://github.com/Adrian-2316/Snippet-Management/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/Glucemy/Glucemy-front.svg?style=for-the-badge
+[contributors-url]: https://github.com/Glucemy/Glucemy-front/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Glucemy/Glucemy-front.svg?style=for-the-badge
+[forks-url]: https://github.com/Glucemy/Glucemy-front/network/members
+[stars-shield]: https://img.shields.io/github/stars/Glucemy/Glucemy-front.svg?style=for-the-badge
+[stars-url]: https://github.com/Glucemy/Glucemy-front/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Glucemy/Glucemy-front.svg?style=for-the-badge
+[issues-url]: https://github.com/Glucemy/Glucemy-front/issues
+[license-shield]: https://img.shields.io/github/license/Glucemy/Glucemy-front.svg?style=for-the-badge
+[license-url]: https://github.com/Glucemy/Glucemy-front/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
