@@ -111,9 +111,9 @@ To get a local copy up and running follow these simple example steps.
   npm install npm@latest -g
   ```
 
-* Angular CLI
+* React
   ```sh
-  npm install -g @angular/cli
+  npm install -g create-react-app
   ```
 
 ### Installation
