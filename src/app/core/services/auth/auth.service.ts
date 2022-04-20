@@ -22,9 +22,6 @@ export class AuthService {
     //     return this.http.post<Register>(this.url + 'register/', registerForm);
     // }
     //
-    // refresh(): Observable<Refresh> {
-    //     return this.http.get<Refresh>(this.url + 'login/refresh/');
-    // }
 
     public saveToken(token: string): void {
         localStorage.removeItem('access_token');
@@ -44,16 +41,18 @@ export class AuthService {
         return localStorage.getItem('refresh_token');
     }
 
-    // refreshToken(token: string) {
-    //     console.log(this.url);
-    //     return this.http.post(
-    //         this.url + 'login/refresh/',
-    //         {
-    //             refresh: token,
-    //         },
-    //         httpOptions
-    //     );
-    // }
+    refreshToken(token: string) {
+        return this.http.post(
+            this.url + 'login/refresh/',
+            {
+                refresh: token,
+            }
+        );
+    }
+
+    googleLogin(access_token: string, id_token: string): Observable<any> {
+        return this.http.post<Login>(this.url + 'social-login/google/', {access_token, id_token});
+    }
 
     signOut(): void {
         localStorage.clear();

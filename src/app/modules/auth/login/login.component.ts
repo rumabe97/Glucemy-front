@@ -39,14 +39,22 @@ export class LoginComponent implements OnInit {
         const password = this.form.get('password')?.value;
 
         this._authService.logIn(username, password).subscribe(res => {
-            console.log(res);
+            this._authService.saveToken(res.access);
+            this._authService.saveRefreshToken(res.refresh);
         });
     }
 
     loginWithGoogle() {
         this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
             .then(res => {
-                console.log(res);
+                this.getUser(res);
             });
+    }
+
+    private getUser(res) {
+        this._authService.googleLogin(res.authToken, res.idToken).subscribe(res => {
+            this._authService.saveToken(res.access_token);
+            this._authService.saveRefreshToken(res.refresh_token);
+        });
     }
 }
