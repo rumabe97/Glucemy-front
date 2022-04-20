@@ -7,12 +7,12 @@
 					</span>
 
 
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz"
-                     [ngClass]="formSubmit('email') ? '' : 'alert-validate'">
-                    <input class="input100" type="text" [formControlName]="'email'"
-                           [ngClass]="form.get('email')?.value ? 'has-val' :''">
+                <div class="wrap-input100 validate-input" data-validate="Email or Username is required"
+                     [ngClass]="formSubmit('username') ? '' : 'alert-validate'">
+                    <input class="input100" type="text" [formControlName]="'username'"
+                           [ngClass]="form.get('username')?.value ? 'has-val' :''">
                     <span class="focus-input100"></span>
-                    <span class="label-input100">Email</span>
+                    <span class="label-input100">Email or username</span>
                 </div>
 
 
