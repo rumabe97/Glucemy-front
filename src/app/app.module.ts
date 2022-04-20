@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {AuthModule} from "./modules/auth/auth.module";
 import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
+import {GoogleLoginProvider, SocialLoginModule} from "@abacritt/angularx-social-login";
 
 @NgModule({
     declarations: [
@@ -16,9 +17,22 @@ import {HttpClientModule} from "@angular/common/http";
         AppRoutingModule,
         AuthModule,
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        SocialLoginModule
     ],
-    providers: [],
+    providers: [{
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+            autoLogin: true,
+            providers: [
+                {
+                    id: GoogleLoginProvider.PROVIDER_ID,
+                    provider: new GoogleLoginProvider('134169247632-318tks8l71omeg5v4vubvomn6qfkoiov.apps.googleusercontent.com')
+                }
+            ]
+        }
+    },
+        /*AuthGuardService*/],
     bootstrap: [AppComponent]
 })
 export class AppModule {
