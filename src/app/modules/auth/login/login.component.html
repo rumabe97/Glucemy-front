@@ -2,36 +2,88 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <form class="login100-form validate-form" [formGroup]="form" (ngSubmit)="login()">
-					<span class="login100-form-title p-b-43">
-						Glucemy
-					</span>
+                <span class="login100-form-title p-b-43">Glucemy</span>
 
+                <ng-container *ngIf="!register; else formRegister">
+                    <div class="wrap-input100 validate-input" data-validate="Email or Username is required"
+                         [ngClass]="formSubmit('username') ? '' : 'alert-validate'">
+                        <input class="input100" type="text" [formControlName]="'username'"
+                               [ngClass]="form.get('username')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Email or username</span>
+                    </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Email or Username is required"
-                     [ngClass]="formSubmit('username') ? '' : 'alert-validate'">
-                    <input class="input100" type="text" [formControlName]="'username'"
-                           [ngClass]="form.get('username')?.value ? 'has-val' :''">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Email or username</span>
-                </div>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required"
+                         [ngClass]="formSubmit('password') ? '' : 'alert-validate'">
+                        <input class="input100" type="password" [formControlName]="'password'"
+                               [ngClass]="form.get('password')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Password</span>
+                    </div>
+                </ng-container>
 
+                <ng-template #formRegister>
+                    <button type="button" class="close" aria-label="Close" (click)="register = false">
+                        <span aria-hidden="true">Return to login</span>
+                    </button>
+                    <div class="wrap-input100 validate-input" data-validate="Email is required"
+                         [ngClass]="formSubmit('email') ? '' : 'alert-validate'">
+                        <input class="input100" type="text" [formControlName]="'email'"
+                               [ngClass]="form.get('email')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Email</span>
+                    </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required"
-                     [ngClass]="formSubmit('password') ? '' : 'alert-validate'">
-                    <input class="input100" type="password" [formControlName]="'password'"
-                           [ngClass]="form.get('password')?.value ? 'has-val' :''">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Password</span>
-                </div>
+                    <div class="wrap-input100 validate-input" data-validate="Username is required"
+                         [ngClass]="formSubmit('usernameRegister') ? '' : 'alert-validate'">
+                        <input class="input100" type="text" [formControlName]="'usernameRegister'"
+                               [ngClass]="form.get('usernameRegister')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Username</span>
+                    </div>
 
-                <div class="container-login100-form-btn">
+                    <div class="wrap-input100 validate-input" data-validate="First Name is required"
+                         [ngClass]="formSubmit('first_name') ? '' : 'alert-validate'">
+                        <input class="input100" type="text" [formControlName]="'first_name'"
+                               [ngClass]="form.get('first_name')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">First name</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Last Name is required"
+                         [ngClass]="formSubmit('last_name') ? '' : 'alert-validate'">
+                        <input class="input100" type="text" [formControlName]="'last_name'"
+                               [ngClass]="form.get('last_name')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Last name</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required"
+                         [ngClass]="formSubmit('passwordRegister') ? '' : 'alert-validate'">
+                        <input class="input100" type="password" [formControlName]="'passwordRegister'"
+                               [ngClass]="form.get('passwordRegister')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Password</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Email is required"
+                         [ngClass]="formSubmit('password2') ? '' : 'alert-validate'">
+                        <input class="input100" type="password" [formControlName]="'password2'"
+                               [ngClass]="form.get('password2')?.value ? 'has-val' :''">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Confirm Password</span>
+                    </div>
+
+                </ng-template>
+
+                <div class="container-login100-form-btn" *ngIf="!register">
                     <button class="login100-form-btn">
                         Login
                     </button>
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button type="button" class="login100-form-btn">
+                    <button type="button" class="login100-form-btn" (click)="register ? newUser() : register = true">
                         Sign Up
                     </button>
                 </div>

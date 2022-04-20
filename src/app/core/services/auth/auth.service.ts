@@ -3,7 +3,8 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {Login} from "../../auth/login.model";
+import {ILogin} from "../../auth/login.model";
+import {IRegister} from "../../auth/register.model";
 
 @Injectable({
     providedIn: 'root'
@@ -14,14 +15,14 @@ export class AuthService {
     constructor(private http: HttpClient, private route: Router) {
     }
 
-    logIn(username: string, password: string): Observable<Login> {
-        return this.http.post<Login>(this.url + 'login/', {username, password});
+    logIn(username: string, password: string): Observable<ILogin> {
+        return this.http.post<ILogin>(this.url + 'login/', {username, password});
     }
 
-    // register(registerForm: FormGroup): Observable<Register> {
-    //     return this.http.post<Register>(this.url + 'register/', registerForm);
-    // }
-    //
+    register(register: IRegister): Observable<any> {
+        return this.http.post<any>(this.url + 'register/', register);
+    }
+
 
     public saveToken(token: string): void {
         localStorage.removeItem('access_token');
@@ -51,7 +52,7 @@ export class AuthService {
     }
 
     googleLogin(access_token: string, id_token: string): Observable<any> {
-        return this.http.post<Login>(this.url + 'social-login/google/', {access_token, id_token});
+        return this.http.post<ILogin>(this.url + 'social-login/google/', {access_token, id_token});
     }
 
     signOut(): void {
