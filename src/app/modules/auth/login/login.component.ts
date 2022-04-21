@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth/auth.service";
-import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
+import {GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
 import {IRegister} from "../../../core/auth/register.model";
 
 @Component({
@@ -63,8 +63,22 @@ export class LoginComponent implements OnInit {
             });
     }
 
+    loginWithOutlook() {
+        this._socialAuthService.signIn(MicrosoftLoginProvider.PROVIDER_ID,)
+            .then(res => {
+                this.getUserOutlook(res);
+            });
+    }
+
     private getUser(res) {
         this._authService.googleLogin(res.authToken, res.idToken).subscribe(res => {
+            this._authService.saveToken(res.access_token);
+            this._authService.saveRefreshToken(res.refresh_token);
+        });
+    }
+
+    private getUserOutlook(res) {
+        this._authService.outlookLogin(res.authToken, res.idToken).subscribe(res => {
             this._authService.saveToken(res.access_token);
             this._authService.saveRefreshToken(res.refresh_token);
         });

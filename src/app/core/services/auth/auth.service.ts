@@ -55,6 +55,10 @@ export class AuthService {
         return this.http.post<ILogin>(this.url + 'social-login/google/', {access_token, id_token});
     }
 
+    outlookLogin(access_token: string, id_token: string): Observable<any> {
+        return this.http.post<ILogin>(this.url + 'social-login/outlook/', {access_token, id_token});
+    }
+
     signOut(): void {
         localStorage.clear();
         this.route.navigate(['/']).then();
