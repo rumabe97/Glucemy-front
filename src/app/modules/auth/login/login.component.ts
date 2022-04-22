@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
         this.formInit();
         this._socialAuthService.authState.subscribe(state => {
             if (state) {
-                console.log(state);
-                this.register = true;
+                console.log(state)
+                this.getUser(state);
             }
         });
     }
@@ -63,11 +63,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginWithGoogle() {
-        this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID,{ux_mode:'redirect'})
-            .then(res => {
-                console.log(res);
-                this.getUser(res);
-            });
+        this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID,{ux_mode:'redirect'});
     }
 
     loginWithOutlook() {
