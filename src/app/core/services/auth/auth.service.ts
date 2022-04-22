@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {ILogin} from "../../auth/login.model";
 import {IRegister} from "../../auth/register.model";
+import {SocialAuthService} from "@abacritt/angularx-social-login";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ import {IRegister} from "../../auth/register.model";
 export class AuthService {
     url = environment.apiUrl + 'auth/';
 
-    constructor(private http: HttpClient, private route: Router) {
+    constructor(private http: HttpClient, private route: Router, private _socialAuthService: SocialAuthService) {
+
     }
 
     logIn(username: string, password: string): Observable<ILogin> {
@@ -61,6 +63,7 @@ export class AuthService {
 
     signOut(): void {
         localStorage.clear();
+        this._socialAuthService.signOut();
         this.route.navigate(['/']).then();
     }
 }
