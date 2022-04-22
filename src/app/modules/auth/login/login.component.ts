@@ -20,6 +20,12 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.formInit();
+        this._socialAuthService.authState.subscribe(state => {
+            if (state) {
+                console.log(state);
+                this.register = true;
+            }
+        });
     }
 
     formInit() {
@@ -57,7 +63,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginWithGoogle() {
-        this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+        this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID,{ux_mode:'redirect'})
             .then(res => {
                 console.log(res);
                 this.getUser(res);
