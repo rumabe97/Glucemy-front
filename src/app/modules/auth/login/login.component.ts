@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         this._socialAuthService.authState.subscribe(state => {
             if (state) {
                 console.log(state)
-                this.getUser(state);
+                state.provider === "MICROSOFT" ? this.getUserOutlook(state): this.getUser(state);
             }
         });
     }
@@ -67,10 +67,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginWithOutlook() {
-        this._socialAuthService.signIn(MicrosoftLoginProvider.PROVIDER_ID,)
-            .then(res => {
-                this.getUserOutlook(res);
-            });
+        this._socialAuthService.signIn(MicrosoftLoginProvider.PROVIDER_ID,{ux_mode:'redirect'});
     }
 
     private getUser(res) {
