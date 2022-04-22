@@ -7,6 +7,11 @@ import {AuthModule} from "./modules/auth/auth.module";
 import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule} from "@abacritt/angularx-social-login";
+import {environment} from "../environments/environment";
+
+const googleLoginOptions: any = {
+    redirect_uri: `${environment.apiUrl}social-login/google/`,
+}
 
 @NgModule({
     declarations: [
@@ -27,7 +32,7 @@ import {GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule} from "@a
             providers: [
                 {
                     id: GoogleLoginProvider.PROVIDER_ID,
-                    provider: new GoogleLoginProvider('134169247632-318tks8l71omeg5v4vubvomn6qfkoiov.apps.googleusercontent.com')
+                    provider: new GoogleLoginProvider('134169247632-318tks8l71omeg5v4vubvomn6qfkoiov.apps.googleusercontent.com',  {scope: 'email', ux_mode: 'redirect'}),
                 },
                 {
                     id: MicrosoftLoginProvider.PROVIDER_ID,
