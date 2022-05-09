@@ -8,10 +8,14 @@ import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule} from "@abacritt/angularx-social-login";
 import {googleConfig, microsoftConfig} from "./loginsConfig";
+import { HeaderComponent } from './core/header/header.component';
+import { MainComponent } from './core/main/main.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        MainComponent
     ],
     imports: [
         BrowserModule,
