@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5 w-75" src="assets/img/user-2-1.svg">
+                <img class="rounded-circle mt-5 w-75" src="assets/img/user-2-1.svg" alt="user_image">
                 <span class="font-weight-bold">{{user?.first_name}} {{user?.last_name}}</span>
                 <span class="text-black-50">{{user?.email}}</span>
                 <span> </span>
@@ -13,7 +13,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right customTitle">Profile Settings</h4>
                 </div>
-                <div class="row customRow mt-2">
+                <div class="row customRow mt-2 px-3">
                     <div class="wrap-input100 validate-input col-md-6 custom">
                         <input class="input100" type="text" formControlName="first_name"
                                [ngClass]="form.get('first_name')?.value ? 'has-val' :''">
@@ -27,7 +27,7 @@
                         <span class="label-input100">Lastname</span>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 px-3">
                     <div class="wrap-input100 validate-input col-md-12">
                         <input class="input100" type="email" formControlName="email"
                                [ngClass]="form.get('email')?.value ? 'has-val' :''">

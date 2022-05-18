@@ -64,6 +64,6 @@ export class AuthService {
     signOut(): void {
         localStorage.clear();
         this._socialAuthService.signOut();
-        this.route.navigate(['/']).then();
+        this.route.navigate(['/login']).then();
     }
 }

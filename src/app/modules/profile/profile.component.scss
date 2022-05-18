@@ -71,6 +71,7 @@ img {
   border-radius: 10px;
   overflow-y: auto;
   overflow-x: hidden;
+  max-width: 80rem;
 }
 
 .custom{
@@ -78,7 +79,7 @@ img {
 }
 
 .customRow{
-  gap:2rem;
+  gap:1.7rem;
 }
 
 .customButton{
