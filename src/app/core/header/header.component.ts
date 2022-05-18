@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {navConfig} from "./config";
 import {IUser} from "../auth/user.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
     @Input() user: IUser;
 
-    constructor() {
+    constructor(private _router: Router, private _route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
@@ -22,6 +23,6 @@ export class HeaderComponent implements OnInit {
 
     changeView(item: any) {
         this.view = item.name;
-        console.log(this.view);
+        this._router.navigate([`app/${item.path}`]);
     }
 }

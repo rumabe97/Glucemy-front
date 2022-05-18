@@ -6,7 +6,7 @@ import {AuthService} from "../services/auth/auth.service";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthNoGuardGuard implements CanActivate {
     constructor(private _authService: AuthService, private router: Router) {
     }
 
@@ -15,7 +15,8 @@ export class AuthGuard implements CanActivate {
         state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this._authService.getToken()
-            ? true
-            : this.router.parseUrl('/login');
+            ? this.router.parseUrl('/app')
+            : true;
     }
+
 }

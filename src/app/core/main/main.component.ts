@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../services/user/user.service";
 import {IUser} from "../auth/user.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-main',
@@ -11,13 +11,12 @@ export class MainComponent implements OnInit {
 
     user: IUser;
 
-    constructor(private _userService: UserService) {
+    constructor(private _route: ActivatedRoute,) {
+        this.user = this._route.snapshot.data['response'];
     }
 
     ngOnInit(): void {
-        this._userService.me().subscribe(user => {
-            this.user = user;
-        })
+
     }
 
 }
