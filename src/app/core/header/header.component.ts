@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {navConfig} from "./config";
-import {UserService} from "../services/user/user.service";
 import {IUser} from "../auth/user.model";
 
 @Component({
@@ -11,15 +10,18 @@ import {IUser} from "../auth/user.model";
 export class HeaderComponent implements OnInit {
 
     config = navConfig;
+    view: string = 'Home';
 
-    user: IUser;
-    constructor(private _userService: UserService) {
+    @Input() user: IUser;
+
+    constructor() {
     }
 
     ngOnInit(): void {
-        this._userService.me().subscribe(user => {
-            this.user = user;
-        })
     }
 
+    changeView(item: any) {
+        this.view = item.name;
+        console.log(this.view);
+    }
 }

@@ -1,5 +1,5 @@
 .vertical-nav {
-  min-width: 17rem;
+  min-width: 19rem;
   width: 17rem;
   height: 100vh;
   position: fixed;
@@ -28,7 +28,7 @@
 
 @media (max-width: 768px) {
   #sidebar {
-    margin-left: -17rem;
+    margin-left: -19rem;
   }
   #sidebar.active {
     margin-left: 0;

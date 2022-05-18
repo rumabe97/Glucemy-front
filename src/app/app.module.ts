@@ -12,12 +12,15 @@ import {HeaderComponent} from './core/header/header.component';
 import {MainComponent} from './core/main/main.component';
 import {ServerErrorInterceptor} from "./core/interceptors/server-error/server-error.interceptor";
 import {HotToastModule} from "@ngneat/hot-toast";
+import { ProfileComponent } from './modules/profile/profile.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
-        MainComponent
+        MainComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,
@@ -26,7 +29,8 @@ import {HotToastModule} from "@ngneat/hot-toast";
         CommonModule,
         HttpClientModule,
         SocialLoginModule,
-        HotToastModule.forRoot()
+        HotToastModule.forRoot(),
+        ReactiveFormsModule
     ],
     providers: [{
         provide: 'SocialAuthServiceConfig',
