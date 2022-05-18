@@ -14,13 +14,15 @@ import {ServerErrorInterceptor} from "./core/interceptors/server-error/server-er
 import {HotToastModule} from "@ngneat/hot-toast";
 import { ProfileComponent } from './modules/profile/profile.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { CalculatorComponent } from './modules/calculator/calculator.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         MainComponent,
-        ProfileComponent
+        ProfileComponent,
+        CalculatorComponent
     ],
     imports: [
         BrowserModule,

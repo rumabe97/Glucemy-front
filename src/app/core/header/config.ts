@@ -14,4 +14,7 @@ export const navConfig = [
         path: '/calculator',
         icon: 'settings',
     },
+    {
+        name: 'Logout',
+    }
 ];
