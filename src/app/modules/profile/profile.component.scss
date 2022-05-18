@@ -84,10 +84,23 @@ img {
 .customButton{
   width: 16%;
   margin: auto;
+  color: #6675df;
+  background: transparent;
+  border: 1px solid #6675df;
+}
+
+.customButton:hover{
+  color: white;
+  background: #6675df;
 }
 
 .wrap-input100{
   border: 1px solid #9b9595;
+}
+
+.customTitle{
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 
 @media (max-width: 768px) {

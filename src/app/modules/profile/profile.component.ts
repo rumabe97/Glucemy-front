@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {IUser} from "../../core/auth/user.model";
 import {UserService} from "../../core/services/user/user.service";
 import {ActivatedRoute} from "@angular/router";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
     selector: 'app-profile',
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private _formBuilder: FormBuilder, private _userService: UserService, private _route: ActivatedRoute) {
+    constructor(private _formBuilder: FormBuilder, private _userService: UserService, private _route: ActivatedRoute, private _toastService: HotToastService) {
     }
 
     ngOnInit(): void {
@@ -41,6 +42,7 @@ export class ProfileComponent implements OnInit {
         this._userService.update(user).subscribe(
             (response) => {
                 this.user = response;
+                this._toastService.success('Profile updated successfully');
             }
         );
     }
