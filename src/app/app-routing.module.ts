@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./modules/auth/login/login.component";
-import {MainComponent} from "./core/main/main.component";
+import {MainComponent} from "./shared/components/main/main.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
 import {ProfileResolver} from "./core/resolvers/profile.resolver";
 import {AuthGuard} from "./core/guards/auth.guard";

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {IUser} from "../../core/auth/user.model";
+import {IUser} from "../../shared/models/user.model";
 import {UserService} from "../../core/services/user/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";

@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         this._authService.logIn(username, password).subscribe(res => {
             this._authService.saveToken(res.access);
             this._authService.saveRefreshToken(res.refresh);
-            this._router.navigate([`app/`]);
+            this._router.navigate([`app/`]).then();
         });
     }
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         this._authService.googleLogin(res.authToken, res.idToken).subscribe(res => {
             this._authService.saveToken(res.access_token);
             this._authService.saveRefreshToken(res.refresh_token);
-            this._router.navigate([`app/`]);
+            this._router.navigate([`app/`]).then();
         });
     }
 
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
         this._authService.outlookLogin(res.authToken, res.idToken).subscribe(res => {
             this._authService.saveToken(res.access_token);
             this._authService.saveRefreshToken(res.refresh_token);
-            this._router.navigate([`app/`]);
+            this._router.navigate([`app/`]).then();
         });
     }
 

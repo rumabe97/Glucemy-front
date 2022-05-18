@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {SocialAuthService} from "@abacritt/angularx-social-login";
 import {Observable} from "rxjs";
-import {IUser} from "../../auth/user.model";
+import {IUser} from "../../../shared/models/user.model";
 
 @Injectable({
     providedIn: 'root'

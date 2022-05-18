@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {navConfig} from "./config";
-import {IUser} from "../auth/user.model";
+import {IUser} from "../../models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../services/auth/auth.service";
+import {AuthService} from "../../../core/services/auth/auth.service";
 
 @Component({
     selector: 'app-header',
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
             return;
         }
         this.view = item.name;
-        this._router.navigate([`app/${item.path}`]);
+        this._router.navigate([`app/${item.path}`]).then();
     }
 
     logOut() {
