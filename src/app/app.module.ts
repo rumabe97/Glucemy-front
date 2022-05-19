@@ -15,6 +15,7 @@ import {HotToastModule} from "@ngneat/hot-toast";
 import { ProfileComponent } from './modules/profile/profile.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { CalculatorComponent } from './modules/calculator/calculator.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { CalculatorComponent } from './modules/calculator/calculator.component';
         HttpClientModule,
         SocialLoginModule,
         HotToastModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FontAwesomeModule
     ],
     providers: [{
         provide: 'SocialAuthServiceConfig',

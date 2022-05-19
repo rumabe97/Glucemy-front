@@ -1,20 +1,23 @@
+import {faCalculator, faCalendar, faHouse, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+
 export const navConfig = [
     {
         name: 'Home',
         path: '/',
-        icon: 'home',
+        icon: faHouse,
     },
     {
         name: 'Records',
         path: '/records',
-        icon: 'info',
+        icon: faCalendar,
     },
     {
         name: 'Calculator',
         path: '/calculator',
-        icon: 'settings',
+        icon: faCalculator,
     },
     {
         name: 'Logout',
+        icon: faRightFromBracket
     }
 ];

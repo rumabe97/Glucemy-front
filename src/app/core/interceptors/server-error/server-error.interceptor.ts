@@ -16,6 +16,7 @@ import {
 import {AuthService} from '../../services/auth/auth.service';
 import {catchError} from 'rxjs/operators';
 import {HandleErrorServiceService} from "../../services/error-handling/handle-error.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
@@ -26,7 +27,8 @@ export class ServerErrorInterceptor implements HttpInterceptor {
 
     constructor(
         private error: HandleErrorServiceService,
-        private authService: AuthService
+        private authService: AuthService,
+        private _router: Router
     ) {
     }
 
@@ -102,9 +104,11 @@ export class ServerErrorInterceptor implements HttpInterceptor {
                     catchError((err) => {
                         this.isRefreshing = false;
                         this.authService.signOut();
+                        this._router.navigate(['/login']).then();
                         return throwError(err);
                     })
                 );
+            this._router.navigate(['/login']).then();
         }
         return this.refreshTokenSubject.pipe(
             filter((token) => token !== null),

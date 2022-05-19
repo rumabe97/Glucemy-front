@@ -11,10 +11,10 @@
 
     <ul class="nav flex-column bg-white mb-0 px-4">
         <li class="nav-item cursor" *ngFor="let item of config">
-            <p class="nav-link text-dark font-italic"
+            <p class="nav-link text-dark font-italic "
                [ngClass]="view.toLocaleLowerCase() === item.name.toLocaleLowerCase() ? 'bg-light' : ''"
                (click)="changeView(item)">
-                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                <fa-icon [icon]="item?.icon"></fa-icon>
                 {{ item.name }}
             </p>
         </li>

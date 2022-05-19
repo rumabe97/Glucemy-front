@@ -50,12 +50,15 @@
 *
 */
 
-body {
-  background: #599fd9;
-  background: -webkit-linear-gradient(to right, #599fd9, #c2e59c);
-  background: linear-gradient(to right, #599fd9, #c2e59c);
-  min-height: 100vh;
-  overflow-x: hidden;
+.nav-link {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-link:hover{
+  background: #f8f9fa;
+  font-size: 1.1rem;
+  transition: all 0.4s;
 }
 
 .separator {
