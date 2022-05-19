@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const url = this._route.snapshot.firstChild.routeConfig.path;
+        this.view = url === '' ? 'Home' : url;
     }
 
     changeView(item: any) {
