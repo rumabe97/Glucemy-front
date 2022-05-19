@@ -1,11 +1,113 @@
-.content{
-  padding: 0;
+@import "src/app/modules/auth/login/login.component";
+
+.content {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 8px 32px 0 rgb(0 0 0 / 37%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  padding: 0 2rem 2rem 2rem;
   border-radius: 10px;
+  max-width: 80rem;
+}
+
+.scrollable {
+  &::-webkit-scrollbar-thumb {
+    background-color: #8c8c8c;
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+
+    &:hover {
+      background-color: #8c8c8c;
+      width: 0.75rem;
+    }
+  }
+}
+
+.customTitle {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.mediumInput {
+  width: 40%;
+}
+
+.smallInput {
+  width: 15%;
+}
+
+.wrap-input100 {
+  border: 1px solid #9b9595;
+}
+
+.customButton {
+  width: 16%;
+  color: #6675df;
+  background: transparent;
+  border-bottom: 1px solid #6675df;
+  font-size: 1rem;
+  height: 37px;
+  letter-spacing: 0;
+  border-radius: 0;
+}
+
+.login100-form-btn:hover {
+  background: transparent;
+  color: #6675df;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: end;
+  padding: 0 1rem;
+}
+
+.form_content {
+  max-height: 24rem;
   overflow-y: auto;
   overflow-x: hidden;
-  max-width: 80rem;
+}
+
+.result {
+  width: 32%;
+  margin: 1rem auto auto;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.glycemicIndexHard {
+  background: #ff202045;
+}
+
+.glycemicIndexLow{
+    background:#34e36245;
+}
+
+.glycemicIndexMedium{
+    background:#ddf32e45;
+}
+
+@media (max-width: 768px) {
+  .mediumInput, .smallInput {
+    width: 100%;
+  }
+
+  .content{
+    max-width: 90vw;
+  }
+
+  .result{
+    width: 56%;
+  }
 }

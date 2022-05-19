@@ -8,7 +8,7 @@ import {_clean} from "../../../shared/utils/utils";
     providedIn: 'root'
 })
 export class FoodService {
-    url = environment.apiUrl + 'users/';
+    url = environment.apiUrl + 'foods/';
 
     constructor(private _httpClient: HttpClient) {
     }

@@ -1,9 +1,49 @@
 <div class="content">
-    <form class="col-md-8 border-right">
-        <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right customTitle">Calculator</h4>
-            </div>
+    <div class="p-4 py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right customTitle">Calculator</h4>
+            <button type="button" class="login100-form-btn customButton" (click)="addEntry()">
+                Add food
+            </button>
         </div>
+    </div>
+    <form [formGroup]="entries" class="border-right px-3 py-3 scrollable form_content">
+        <form class="presented-to__item"
+              *ngFor="let entry of entries.controls; let i = index"
+              [formGroup]="entry">
+            <div class="row customRow mt-2 px-3 gap-3">
+                <div class="wrap-input100 validate-input col-md-6 mediumInput ">
+                    <input [attr.list]='getId(i)' class="input100" type="text" formControlName="name"
+                           [ngClass]="entry.get('name')?.value ? 'has-val' :''" [(ngModel)]="currentFood[i]"
+                           (change)="$event.stopPropagation();setOption(entry,currentFood[i])"
+                           (keyup)="$event.stopPropagation();searchFood(currentFood[i])" required>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Select a food</span>
+                </div>
+                <datalist id="{{ 'productList' + i }}">
+                    <option [ngValue]="food" *ngFor="let food of foods">{{food?.name}}</option>
+                </datalist>
+                <div class="wrap-input100 validate-input col-md-6 mediumInput">
+                    <input class="input100" type="number" formControlName="usual_measure"
+                           [ngClass]="entry.get('usual_measure')?.value !== '' ? 'has-val' :''" required>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Insert gr/ml</span>
+                </div>
+                <div class="wrap-input100 validate-input col-md-6 smallInput"
+                     [ngClass]="getBackground(entry.get('index').value)">
+                    <input class="input100" type="number" readonly formControlName="index"
+                           [ngClass]="entry.get('index')?.value!=='' ? 'has-val' :''">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Glycemic index</span>
+                </div>
+            </div>
+        </form>
+        <p class="error" *ngIf="entryError">You have to fill all the required values</p>
     </form>
+    <hr/>
+    <div class="wrap-input100 validate-input col-md-6 result">
+        <input class="input100 has-val" type="number" readonly [value]="getRations()">
+        <span class="focus-input100"></span>
+        <span class="label-input100">Recommended rations</span>
+    </div>
 </div>
