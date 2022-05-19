@@ -62,7 +62,7 @@ img {
   align-self: center;
 }
 
-.content{
+.content {
   padding: 0;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 8px 32px 0 rgb(0 0 0 / 37%);
@@ -74,38 +74,47 @@ img {
   max-width: 80rem;
 }
 
-.custom{
+.custom {
   width: 48%;
 }
 
-.customRow{
-  gap:1.7rem;
+.customRow {
+  gap: 1.7rem;
 }
 
-.customButton{
-  width: 16%;
-  margin: auto;
-  color: #6675df;
-  background: transparent;
-  border: 1px solid #6675df;
-}
-
-.customButton:hover{
-  color: white;
-  background: #6675df;
-}
-
-.wrap-input100{
+.wrap-input100 {
   border: 1px solid #9b9595;
 }
 
-.customTitle{
+.customTitle {
   font-weight: bold;
   font-size: 1.25rem;
 }
 
+.border-right {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.customButton {
+  width: 12%;
+  color: #6675df;
+  background: transparent;
+  border-bottom: 1px solid #6675df;
+  font-size: 1rem;
+  height: 37px;
+  letter-spacing: 0;
+  border-radius: 0;
+  margin: 2rem auto auto;
+}
+
+.login100-form-btn:hover {
+  background: transparent;
+  color: #6675df;
+  font-size: 1.1rem;
+}
+
 @media (max-width: 768px) {
-  .custom{
+  .custom {
     width: 100%;
   }
 }
