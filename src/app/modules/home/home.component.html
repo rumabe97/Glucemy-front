@@ -1,0 +1,17 @@
+<div class="content">
+    <div class="p-4 py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="text-right customTitle">Welcome to Glucemy</h2>
+        </div>
+    </div>
+    <div class="cardContent scrollable">
+        <div class="data-card" *ngFor="let item of config" (click)="navigate(item)">
+            <fa-icon [icon]="item?.icon" size="3x" class="customIcon"></fa-icon>
+            <h4>{{item?.name}}</h4>
+            <span class="link-text">
+                Go to {{item?.name}}
+                <fa-icon [icon]="arrow"></fa-icon>
+            </span>
+        </div>
+    </div>
+</div>

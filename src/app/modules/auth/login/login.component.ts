@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
         this.formInit();
         this._socialAuthService.authState.subscribe(state => {
             if (state) {
-                console.log(state)
                 state.provider === "MICROSOFT" ? this.getUserOutlook(state) : this.getUser(state);
             }
         });

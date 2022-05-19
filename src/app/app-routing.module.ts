@@ -8,6 +8,7 @@ import {AuthGuard} from "./core/guards/auth.guard";
 import {AuthNoGuardGuard} from "./core/guards/auth-no-guard.guard";
 import {CalculatorComponent} from "./modules/calculator/calculator.component";
 import {CalculatorResolver} from "./core/resolvers/calculator.resolver";
+import {HomeComponent} from "./modules/home/home.component";
 
 const routes: Routes = [
     {
@@ -22,7 +23,12 @@ const routes: Routes = [
         resolve: {response: ProfileResolver},
         children: [
             {
-                path: '',
+              path:'',
+              component:HomeComponent,
+              canActivate: [AuthGuard],
+            },
+            {
+                path: 'profile',
                 component: ProfileComponent,
                 canActivate: [AuthGuard],
                 resolve: {response: ProfileResolver}
@@ -32,7 +38,7 @@ const routes: Routes = [
                 component: CalculatorComponent,
                 canActivate: [AuthGuard],
                 resolve: {response: CalculatorResolver}
-            }
+            },
         ],
     },
     {

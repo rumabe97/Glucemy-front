@@ -16,6 +16,7 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { CalculatorComponent } from './modules/calculator/calculator.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         HeaderComponent,
         MainComponent,
         ProfileComponent,
-        CalculatorComponent
+        CalculatorComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
