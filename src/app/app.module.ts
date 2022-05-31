@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthModule} from "./modules/auth/auth.module";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule} from "@abacritt/angularx-social-login";
 import {googleConfig, microsoftConfig} from "./loginsConfig";
@@ -42,7 +42,9 @@ import { StatisticsComponent } from './modules/statistics/statistics.component';
         FontAwesomeModule,
         NgChartsModule
     ],
-    providers: [{
+    providers: [
+        DatePipe,
+        {
         provide: 'SocialAuthServiceConfig',
         useValue: {
             autoLogin: true,

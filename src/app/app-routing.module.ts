@@ -10,6 +10,7 @@ import {CalculatorComponent} from "./modules/calculator/calculator.component";
 import {CalculatorResolver} from "./core/resolvers/calculator.resolver";
 import {HomeComponent} from "./modules/home/home.component";
 import {StatisticsComponent} from "./modules/statistics/statistics.component";
+import {StatisticsResolver} from "./core/resolvers/statistics.resolver";
 
 const routes: Routes = [
     {
@@ -24,9 +25,9 @@ const routes: Routes = [
         resolve: {response: ProfileResolver},
         children: [
             {
-              path:'',
-              component:HomeComponent,
-              canActivate: [AuthGuard],
+                path: '',
+                component: HomeComponent,
+                canActivate: [AuthGuard],
             },
             {
                 path: 'profile',
@@ -44,7 +45,7 @@ const routes: Routes = [
                 path: 'statistics',
                 component: StatisticsComponent,
                 canActivate: [AuthGuard],
-                resolve: {response: CalculatorResolver}
+                resolve: {response: StatisticsResolver}
             },
         ],
     },
