@@ -1,0 +1,13 @@
+<div class="chart-container content">
+    <div class="p-4 py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="text-right customTitle">Statistics
+            </h2>
+        </div>
+    </div>
+    <canvas baseChart
+            #chart
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [type]="'line'"></canvas>
+</div>

@@ -9,6 +9,7 @@ import {AuthNoGuardGuard} from "./core/guards/auth-no-guard.guard";
 import {CalculatorComponent} from "./modules/calculator/calculator.component";
 import {CalculatorResolver} from "./core/resolvers/calculator.resolver";
 import {HomeComponent} from "./modules/home/home.component";
+import {StatisticsComponent} from "./modules/statistics/statistics.component";
 
 const routes: Routes = [
     {
@@ -36,6 +37,12 @@ const routes: Routes = [
             {
                 path: 'calculator',
                 component: CalculatorComponent,
+                canActivate: [AuthGuard],
+                resolve: {response: CalculatorResolver}
+            },
+            {
+                path: 'statistics',
+                component: StatisticsComponent,
                 canActivate: [AuthGuard],
                 resolve: {response: CalculatorResolver}
             },

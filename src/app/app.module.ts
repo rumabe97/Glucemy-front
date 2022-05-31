@@ -12,11 +12,13 @@ import {HeaderComponent} from './shared/components/header/header.component';
 import {MainComponent} from './shared/components/main/main.component';
 import {ServerErrorInterceptor} from "./core/interceptors/server-error/server-error.interceptor";
 import {HotToastModule} from "@ngneat/hot-toast";
-import { ProfileComponent } from './modules/profile/profile.component';
+import {ProfileComponent} from './modules/profile/profile.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { CalculatorComponent } from './modules/calculator/calculator.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HomeComponent } from './modules/home/home.component';
+import {CalculatorComponent} from './modules/calculator/calculator.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {HomeComponent} from './modules/home/home.component';
+import {NgChartsModule} from 'ng2-charts';
+import { StatisticsComponent } from './modules/statistics/statistics.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,8 @@ import { HomeComponent } from './modules/home/home.component';
         MainComponent,
         ProfileComponent,
         CalculatorComponent,
-        HomeComponent
+        HomeComponent,
+        StatisticsComponent
     ],
     imports: [
         BrowserModule,
@@ -36,7 +39,8 @@ import { HomeComponent } from './modules/home/home.component';
         SocialLoginModule,
         HotToastModule.forRoot(),
         ReactiveFormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        NgChartsModule
     ],
     providers: [{
         provide: 'SocialAuthServiceConfig',

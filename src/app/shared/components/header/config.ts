@@ -1,10 +1,17 @@
-import {faAddressCard, faCalculator, faCalendar, faHouse, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {
+    faAddressCard,
+    faCalculator,
+    faCalendar,
+    faChartLine,
+    faHouse,
+    faRightFromBracket
+} from "@fortawesome/free-solid-svg-icons";
 
 export const navConfig = [
     {
         name: 'Home',
         path: '/',
-        activePath:'home',
+        activePath: 'home',
         icon: faHouse,
     },
     {
@@ -24,6 +31,12 @@ export const navConfig = [
         path: '/calculator',
         activePath: 'profile',
         icon: faCalculator,
+    },
+    {
+        name: 'Statistics',
+        path: '/statistics',
+        activePath: 'statistics',
+        icon: faChartLine,
     },
     {
         name: 'Logout',
@@ -47,6 +60,11 @@ export const homeConfig = [
         name: 'Calculator',
         path: '/calculator',
         icon: faCalculator,
+    },
+    {
+        name: 'Statistics',
+        path: '/statistics',
+        icon: faChartLine,
     },
     {
         name: 'Logout',
