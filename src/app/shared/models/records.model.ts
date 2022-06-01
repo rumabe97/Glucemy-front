@@ -6,6 +6,8 @@ export interface IRecords {
     blood_glucose: number;
     carbohydrates: number;
     annotation: string;
+    hc_rations: number;
+    bolus: number;
     foods: IFood[];
     phases_day: any;
     user: IUser;
