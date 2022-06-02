@@ -4,8 +4,8 @@ import {
     RouterStateSnapshot,
     ActivatedRouteSnapshot
 } from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {FoodService} from "../services/food/food.service";
+import {Observable} from 'rxjs';
+import {FoodService} from "../../services/food/food.service";
 
 @Injectable({
     providedIn: 'root'

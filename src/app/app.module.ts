@@ -19,6 +19,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HomeComponent} from './modules/home/home.component';
 import {NgChartsModule} from 'ng2-charts';
 import { StatisticsComponent } from './modules/statistics/statistics.component';
+import { RecordsComponent } from './modules/records/records.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { StatisticsComponent } from './modules/statistics/statistics.component';
         ProfileComponent,
         CalculatorComponent,
         HomeComponent,
-        StatisticsComponent
+        StatisticsComponent,
+        RecordsComponent
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="p-4 py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="text-right customTitle">Records</h2>
+            <button type="button" class="login100-form-btn customButton">
+                Add record
+            </button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-start px-3">
+        <div class="wrap-input100 validate-input col-md-6 smallInput">
+            <input class="input100 has-val" type="date" [formControl]="date">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Record date</span>
+        </div>
+    </div>
+    <div class="cardContent scrollable">
+        <div class="data-card" *ngFor="let item of data">
+            <fa-icon [icon]="getIcon(item?.phasesDay?.name)" size="3x" class="customIcon"></fa-icon>
+            <div class="values">
+                <h4>{{item?.phasesDay?.name}}</h4>
+            </div>
+            <span class="link-text">
+                Go to record
+                <fa-icon [icon]="arrow"></fa-icon>
+            </span>
+
+        </div>
+    </div>
+</div>

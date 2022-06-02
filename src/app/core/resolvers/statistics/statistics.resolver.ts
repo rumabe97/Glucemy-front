@@ -5,7 +5,7 @@ import {
     ActivatedRouteSnapshot
 } from '@angular/router';
 import {Observable} from 'rxjs';
-import {RecordsService} from "../services/records/records.service";
+import {RecordsService} from "../../services/records/records.service";
 import {DatePipe} from "@angular/common";
 
 @Injectable({

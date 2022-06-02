@@ -9,9 +9,10 @@ export interface IRecords {
     hc_rations: number;
     bolus: number;
     foods: IFood[];
-    phases_day: any;
+    phasesDay: any;
     user: IUser;
     idUser?: string;
     idFood?: string;
-    idPhaseDay?: string;
+    idPhaseDay?: any;
+    created_date: string;
 }

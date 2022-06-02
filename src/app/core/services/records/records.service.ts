@@ -47,7 +47,7 @@ export class RecordsService {
 
     charts(startDate: string, endDate: string) {
         return this._httpClient.get<any>(
-            `${this.url}${startDate}/${endDate}`
+            `${this.url}chart/${startDate}/${endDate}`
         );
     }
 
@@ -60,7 +60,7 @@ export class RecordsService {
 
     findByday(day:string){
         return this._httpClient.get<any>(
-            `${this.url}${day}/`
+            `${this.url}day/${day}/`
         );
     }
 }
