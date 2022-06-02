@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="cardContent scrollable">
-        <div class="data-card" *ngFor="let item of data">
+        <div class="data-card" *ngFor="let item of data" (click)="navigate(item)">
             <fa-icon [icon]="getIcon(item?.phasesDay?.name)" size="3x" class="customIcon"></fa-icon>
             <div class="values">
                 <h4>{{item?.phasesDay?.name}}</h4>

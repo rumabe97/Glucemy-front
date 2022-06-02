@@ -5,14 +5,14 @@ export interface IRecords {
     id: string;
     blood_glucose: number;
     carbohydrates: number;
-    annotation: string;
+    annotations: string;
     hc_rations: number;
     bolus: number;
     foods: IFood[];
     phasesDay: any;
     user: IUser;
     idUser?: string;
-    idFood?: string;
+    idFoods?: string[];
     idPhaseDay?: any;
     created_date: string;
 }

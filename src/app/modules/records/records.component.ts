@@ -49,6 +49,9 @@ export class RecordsComponent implements OnInit {
         this._router.navigate(['../records/new'], {relativeTo: this._route}).then();
     }
 
+    navigate(item:any){
+        this._router.navigate([`app/records/${item?.id}`]).then();
+    }
     getIcon(type: string): any {
         if (type === 'Desayuno') return this.brekfastIcon;
         if (type === 'Almuerzo') return this.almuerzoIcon;

@@ -20,7 +20,7 @@ export class RecordsService {
 
     update(records: IRecords) {
         return this._httpClient.put<IRecords>(
-            `${this.url}/${records?.id}`, _clean(records)
+            `${this.url}${records?.id}`, _clean(records)
         );
     }
 
@@ -34,15 +34,15 @@ export class RecordsService {
     }
 
     get(id: string) {
-        return this._httpClient.get<IRecords>(`${this.url}/${id}`);
+        return this._httpClient.get<IRecords>(`${this.url}${id}`);
     }
 
     patch(records: IRecords) {
-        return this._httpClient.patch<IRecords>(`${this.url}/${records?.id}`, _clean(records));
+        return this._httpClient.patch<IRecords>(`${this.url}${records?.id}`, _clean(records));
     }
 
     delete(id: string) {
-        return this._httpClient.delete<IRecords>(`${this.url}/${id}`);
+        return this._httpClient.delete<IRecords>(`${this.url}${id}`);
     }
 
     charts(startDate: string, endDate: string) {

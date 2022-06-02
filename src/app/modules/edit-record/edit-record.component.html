@@ -1,6 +1,6 @@
 <div class="content">
-    <div class="p-4 py-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="p-4 pb-0">
+        <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-right customTitle">New Record</h4>
             <button type="button" class="login100-form-btn customButton" (click)="addEntry()">
                 Add food
@@ -20,8 +20,8 @@
                 <option [ngValue]="phase" *ngFor="let phase of phasesDay">{{phase?.name}}</option>
             </datalist>
             <div class="wrap-input100 validate-input col-md-6 custom">
-                <input list="phaseDay" class="input100" type="text" formControlName="bloodGlucose"
-                       [ngClass]="form.get('bloodGlucose')?.value ? 'has-val' :''">
+                <input list="phaseDay" class="input100" type="text" formControlName="blood_glucose"
+                       [ngClass]="form.get('blood_glucose')?.value ? 'has-val' :''">
                 <span class="focus-input100"></span>
                 <span class="label-input100">Blood glucose</span>
             </div>
@@ -34,7 +34,7 @@
         </div>
     </form>
 
-    <form [formGroup]="entries" class="border-right px-3 py-3 scrollable form_content_small">
+    <form [formGroup]="entries" class="border-right px-3 scrollable form_content_small">
         <form class="presented-to__item"
               *ngFor="let entry of entries.controls; let i = index"
               [formGroup]="entry">
@@ -80,4 +80,7 @@
             <span class="label-input100">Bolus</span>
         </div>
     </div>
+    <button type="submit" class="login100-form-btn customButton m-auto" (click)="save()">
+        Save
+    </button>
 </div>
