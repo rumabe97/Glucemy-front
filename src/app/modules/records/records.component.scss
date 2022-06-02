@@ -23,8 +23,8 @@
   font-size: 1.25rem;
 }
 
-.cardContent{
-  max-height: 25rem;
+.cardContent {
+  max-height: 28rem;
 }
 
 .wrap-input100 {
@@ -37,11 +37,12 @@
 
 .data-card {
   flex-direction: row;
-  width: 25em;
+  width: 21em;
   min-height: 7em;
-  padding: 1.75em 2.5em;
+  padding: 1.75em 1.5em;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 
   fa-icon {
     padding: 0 !important;
