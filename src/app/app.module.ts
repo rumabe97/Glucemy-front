@@ -20,6 +20,7 @@ import {HomeComponent} from './modules/home/home.component';
 import {NgChartsModule} from 'ng2-charts';
 import { StatisticsComponent } from './modules/statistics/statistics.component';
 import { RecordsComponent } from './modules/records/records.component';
+import { EditRecordComponent } from './modules/edit-record/edit-record.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { RecordsComponent } from './modules/records/records.component';
         CalculatorComponent,
         HomeComponent,
         StatisticsComponent,
-        RecordsComponent
+        RecordsComponent,
+        EditRecordComponent
     ],
     imports: [
         BrowserModule,

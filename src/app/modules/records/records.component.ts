@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IRecords} from "../../shared/models/records.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {faArrowRight, faBowlFood, faMugSaucer} from "@fortawesome/free-solid-svg-icons";
 import {faUtensils} from "@fortawesome/free-solid-svg-icons/faUtensils";
 import {faBreadSlice} from "@fortawesome/free-solid-svg-icons/faBreadSlice";
@@ -26,7 +26,7 @@ export class RecordsComponent implements OnInit {
 
     date: FormControl;
 
-    constructor(private _route: ActivatedRoute, private _recordsService: RecordsService, private datePipe: DatePipe) {
+    constructor(private _route: ActivatedRoute, private _recordsService: RecordsService, private datePipe: DatePipe, private _router: Router) {
     }
 
     ngOnInit(): void {
@@ -45,6 +45,9 @@ export class RecordsComponent implements OnInit {
         });
     }
 
+    newRecord() {
+        this._router.navigate(['../records/new'], {relativeTo: this._route}).then();
+    }
 
     getIcon(type: string): any {
         if (type === 'Desayuno') return this.brekfastIcon;

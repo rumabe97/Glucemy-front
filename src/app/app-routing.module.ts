@@ -13,6 +13,7 @@ import {StatisticsComponent} from "./modules/statistics/statistics.component";
 import {StatisticsResolver} from "./core/resolvers/statistics/statistics.resolver";
 import {RecordsComponent} from "./modules/records/records.component";
 import {RecordsResolver} from "./core/resolvers/records/records.resolver";
+import {EditRecordComponent} from "./modules/edit-record/edit-record.component";
 
 const routes: Routes = [
     {
@@ -54,6 +55,11 @@ const routes: Routes = [
                 component: RecordsComponent,
                 canActivate: [AuthGuard],
                 resolve: {response: RecordsResolver}
+            },
+            {
+                path: 'records/new',
+                component: EditRecordComponent,
+                canActivate: [AuthGuard]
             },
         ],
     },

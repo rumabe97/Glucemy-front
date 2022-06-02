@@ -1,15 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {PhasesDayService} from "../../core/services/phases-day/phases-day.service";
 import {IFood} from "../../shared/models/food.model";
 import {FoodService} from "../../core/services/food/food.service";
 
 @Component({
-    selector: 'app-calculator',
-    templateUrl: './calculator.component.html',
-    styleUrls: ['./calculator.component.scss']
+    selector: 'app-edit-record',
+    templateUrl: './edit-record.component.html',
+    styleUrls: ['./edit-record.component.scss']
 })
-export class CalculatorComponent implements OnInit {
+export class EditRecordComponent implements OnInit {
+
+    form: FormGroup;
+    currentPhaseDay: any;
+    phasesDay: any[] = [];
 
     entries: FormArray;
 
@@ -18,15 +22,32 @@ export class CalculatorComponent implements OnInit {
     entryError: boolean = false;
     rations: number = 0;
 
-    constructor(private _router: ActivatedRoute, private _fb: FormBuilder, private _foodService: FoodService) {
+    bolus:FormControl;
+
+    constructor(private _fb: FormBuilder, private _phaseDayService: PhasesDayService, private _foodService: FoodService) {
     }
 
     ngOnInit(): void {
-        this.foods = this._router.snapshot.data['response']?.results;
         this.formInit();
+        this.formFoodInit();
+        this.bolus = new FormControl('');
     }
 
     formInit() {
+        this.form = this._fb.group({
+            phaseDay: [''],
+            bloodGlucose: [''],
+            annotations: [''],
+        });
+    }
+
+    searchPhase(value: any) {
+        this._phaseDayService.search({search: value, page: 1}).subscribe(response => {
+            this.phasesDay = response.results;
+        });
+    }
+
+    formFoodInit() {
         this.entries = this._fb.array([]);
         this.addEntry();
     }
@@ -81,4 +102,5 @@ export class CalculatorComponent implements OnInit {
         if (value >= 60 && value < 70) return 'glycemicIndexMedium';
         return 'glycemicIndexHard';
     }
+
 }

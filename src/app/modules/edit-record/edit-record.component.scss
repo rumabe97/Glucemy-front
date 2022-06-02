@@ -1,0 +1,25 @@
+@import "src/app/modules/auth/login/login.component";
+@import "src/app/modules/calculator/calculator.component";
+
+.result{
+  margin: 0;
+}
+
+.form_content_small{
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.custom {
+  width: 46%;
+}
+
+.customRow {
+  gap: 1.7rem;
+  justify-content: space-between;
+}
+
+.fix{
+  width: 98%;
+  margin: 0.3rem;
+}
