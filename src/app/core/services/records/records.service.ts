@@ -51,7 +51,10 @@ export class RecordsService {
         );
     }
 
-    report() {
-       return this._httpClient.post(`${this.url}report/`,{}, { responseType: 'blob'});
+    report(startDate: string, endDate: string) {
+        return this._httpClient.post(`${this.url}report/`, {
+            start_date: startDate,
+            end_date: endDate
+        }, {responseType: 'blob'});
     }
 }

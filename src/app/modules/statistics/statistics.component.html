@@ -1,13 +1,25 @@
 <div class="chart-container content">
     <div class="p-4 py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="text-right customTitle">Statistics
-            </h2>
+            <h4 class="text-right customTitle">Statistics
+            </h4>
+            <button type="button" class="login100-form-btn customButton" (click)="download()">
+                Download
+            </button>
         </div>
     </div>
-    <canvas baseChart
-            #chart
-            [data]="lineChartData"
-            [options]="lineChartOptions"
-            [type]="'line'"></canvas>
+
+    <div class="d-flex justify-content-around">
+        <div class="wrap-input100 validate-input col-md-6 smallInput">
+            <input class="input100 has-val" type="date" [formControl]="end_date">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Start date</span>
+        </div>
+        <div class="wrap-input100 validate-input col-md-6 smallInput">
+            <input class="input100 has-val" type="date" [formControl]="start_date">
+            <span class="focus-input100"></span>
+            <span class="label-input100">End date</span>
+        </div>
+    </div>
+    <canvas #chart></canvas>
 </div>

@@ -1,47 +1,94 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ChartConfiguration} from 'chart.js';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Chart, ChartConfiguration} from 'chart.js';
 import {ActivatedRoute} from "@angular/router";
+import {RecordsService} from "../../core/services/records/records.service";
+import {FormControl} from "@angular/forms";
+import {DatePipe} from "@angular/common";
 
 @Component({
-  selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+    selector: 'app-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit {
-  lineChartOptions = {
-    responsive: true,
-  };
-  lineChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: [],
-        label: 'Blood glucose',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'red',
-      },
-      {
-        data: [],
-        label: 'Carbohydrates',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'blue',
-      }
-    ],
-    labels: []
-  };
+export class StatisticsComponent implements OnInit, AfterViewInit {
+    lineChartData: ChartConfiguration = {
+        type: 'line',
+        data: {
+            datasets: [
+                {
+                    data: [],
+                    label: 'Blood glucose',
+                    backgroundColor: 'rgba(255,255,255,0)',
+                    borderColor: 'rgba(136,8,8,0.74)',
+                },
+                {
+                    data: [],
+                    label: 'Carbohydrates',
+                    backgroundColor: 'rgb(255,255,255,0)',
+                    borderColor: 'rgba(150,175,90,0.75)',
+                }
+            ],
+            labels: []
+        }
+    };
+    start_date: FormControl;
+    end_date: FormControl;
 
-  @ViewChild('chart') chart: any;
+    chartConfig: Chart;
 
-  constructor(private _route: ActivatedRoute) {
-    window.addEventListener('afterprint', () => {
-      this.chart.resize();
-    });
-  }
+    @ViewChild('chart') private chart: ElementRef;
 
-  ngOnInit(): void {
-    const data = this._route.snapshot.data['response'];
-    this.lineChartData.datasets[0].data = data.blood_glucose_data;
-    this.lineChartData.datasets[1].data = data.carbohydrates_data;
-    this.lineChartData.labels = data.labels;
-  }
+    constructor(private _route: ActivatedRoute, private _recordsService: RecordsService, private datePipe: DatePipe) {
+    }
 
+    ngAfterViewInit(): void {
+        this.chartConfig = new Chart(this.chart.nativeElement, this.lineChartData);
+    }
+
+    ngOnInit(): void {
+        const data = this._route.snapshot.data['response'];
+        this.lineChartData['data'].datasets[0].data = data.blood_glucose_data;
+        this.lineChartData['data'].datasets[1].data = data.carbohydrates_data;
+        this.lineChartData['data'].labels = data.labels;
+        const now = new Date();
+        const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 7);
+        this.start_date = new FormControl(startDate.toISOString().slice(0, 10));
+        this.end_date = new FormControl(endDate.toISOString().slice(0, 10));
+
+        this.start_date.valueChanges.subscribe(() => {
+            this.updateChart();
+        });
+        this.end_date.valueChanges.subscribe(() => {
+            this.updateChart();
+
+        });
+    }
+
+    download() {
+        const date = new Date(this.start_date.value);
+        const startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+        this._recordsService.report(this.datePipe.transform(this.end_date.value, "yyyy-MM-dd"),
+            this.datePipe.transform(startDate, "yyyy-MM-dd")).subscribe(res => {
+            let blob = new Blob([res], {type: 'application/pdf'});
+            let pdfUrl = window.URL.createObjectURL(blob);
+
+            let PDF_link = document.createElement('a');
+            PDF_link.href = pdfUrl;
+            PDF_link.download = `report_${this.datePipe.transform(this.end_date.value, "yyyy-MM-dd")}_${this.datePipe.transform(this.start_date.value, "yyyy-MM-dd")}.pdf`;
+            PDF_link.click();
+        });
+    }
+
+    updateChart() {
+        const date = new Date(this.start_date.value);
+        const startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+        this._recordsService.charts(this.datePipe.transform(this.end_date.value, "yyyy-MM-dd"), this.datePipe.transform(startDate, "yyyy-MM-dd"))
+            .subscribe(res => {
+                this.lineChartData['data'].datasets[0].data = res.blood_glucose_data;
+                this.lineChartData['data'].datasets[1].data = res.carbohydrates_data;
+                this.lineChartData['data'].labels = res.labels;
+                this.chartConfig.update();
+            })
+    }
 }
