@@ -52,6 +52,6 @@ export class RecordsService {
     }
 
     report() {
-        return this._httpClient.get<any>(`${this.url}report/`);
+       return this._httpClient.post(`${this.url}report/`,{}, { responseType: 'blob'});
     }
 }
