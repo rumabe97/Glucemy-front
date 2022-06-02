@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Chart, ChartConfiguration} from 'chart.js';
+import {Chart} from 'chart.js';
 import {ActivatedRoute} from "@angular/router";
 import {RecordsService} from "../../core/services/records/records.service";
 import {FormControl} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {lineChartData} from "./config";
 
 @Component({
     selector: 'app-statistics',
@@ -11,29 +12,10 @@ import {DatePipe} from "@angular/common";
     styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit, AfterViewInit {
-    lineChartData: ChartConfiguration = {
-        type: 'line',
-        data: {
-            datasets: [
-                {
-                    data: [],
-                    label: 'Blood glucose',
-                    backgroundColor: 'rgba(255,255,255,0)',
-                    borderColor: 'rgba(136,8,8,0.74)',
-                },
-                {
-                    data: [],
-                    label: 'Carbohydrates',
-                    backgroundColor: 'rgb(255,255,255,0)',
-                    borderColor: 'rgba(150,175,90,0.75)',
-                }
-            ],
-            labels: []
-        }
-    };
     start_date: FormControl;
     end_date: FormControl;
 
+    lineChartData = lineChartData;
     chartConfig: Chart;
 
     @ViewChild('chart') private chart: ElementRef;

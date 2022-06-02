@@ -57,4 +57,10 @@ export class RecordsService {
             end_date: endDate
         }, {responseType: 'blob'});
     }
+
+    findByday(day:string){
+        return this._httpClient.get<any>(
+            `${this.url}${day}/`
+        );
+    }
 }
