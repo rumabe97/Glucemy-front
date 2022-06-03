@@ -75,6 +75,7 @@ const routes: Routes = [
         redirectTo: 'app',
         pathMatch: 'full',
     },
+    {path: '**', redirectTo: 'app'}
 ];
 
 @NgModule({
