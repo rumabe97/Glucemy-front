@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://glucemy-back.vercel.app/api',
+    apiUrl: 'https://glucemy-back.vercel.app/api/',
 };
 
 /*
