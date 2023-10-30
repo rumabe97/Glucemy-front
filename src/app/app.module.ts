@@ -62,7 +62,7 @@ import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loadin
                 },
                 {
                     id: MicrosoftLoginProvider.PROVIDER_ID,
-                    provider: new MicrosoftLoginProvider('4156d8d0-086d-4dad-a03a-14ce0919a084', microsoftConfig)
+                    provider: new MicrosoftLoginProvider('3c66a3bf-9d9b-4f1e-a748-1b21e610e6ff', microsoftConfig)
                 }
             ]
         }
