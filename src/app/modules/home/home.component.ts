@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit {
 
     logOut() {
         this._authService.signOut();
-        this._router.navigate(['/login']).then();
+        setTimeout( () => {
+            this._router.navigate(['/login']).then();
+        },1000)
     }
 
 }

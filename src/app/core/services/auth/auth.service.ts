@@ -63,6 +63,8 @@ export class AuthService {
 
     signOut(): void {
         localStorage.clear();
+        localStorage.clear();
+        localStorage.clear();
         this._socialAuthService.signOut();
     }
 }
