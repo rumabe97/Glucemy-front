@@ -1,3 +1,7 @@
+<div *ngIf="loading" class="loader">
+    <app-loader></app-loader>
+</div>
+
 <app-header [user]="user"></app-header>
 <div class="mainContent">
     <router-outlet></router-outlet>

@@ -21,11 +21,14 @@ import {NgChartsModule} from 'ng2-charts';
 import { StatisticsComponent } from './modules/statistics/statistics.component';
 import { RecordsComponent } from './modules/records/records.component';
 import { EditRecordComponent } from './modules/edit-record/edit-record.component';
+import {LoaderComponent} from "./shared/components/loader/loader.component";
+import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loading.interceptor";
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
+        LoaderComponent,
         MainComponent,
         ProfileComponent,
         CalculatorComponent,
@@ -69,6 +72,12 @@ import { EditRecordComponent } from './modules/edit-record/edit-record.component
             useClass: ServerErrorInterceptor,
             multi: true,
         },
+        ,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoadingInterceptor,
+            multi: true
+        }
         /*AuthGuardService*/],
     bootstrap: [AppComponent]
 })
