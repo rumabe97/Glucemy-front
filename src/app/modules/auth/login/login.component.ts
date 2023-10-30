@@ -4,6 +4,8 @@ import {AuthService} from "../../../core/services/auth/auth.service";
 import {GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
 import {IRegister} from "../../../core/auth/register.model";
 import {Router} from "@angular/router";
+import {LoadingService} from "../../../core/services/loading/loading.service";
+import {delay} from "rxjs";
 
 @Component({
     selector: 'app-login',
@@ -15,8 +17,10 @@ export class LoginComponent implements OnInit {
     form: FormGroup;
     isSubmitted = false;
     register = false;
+    loading: boolean = false;
 
-    constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _socialAuthService: SocialAuthService, private _router: Router,) {
+    constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _socialAuthService: SocialAuthService,
+                private _router: Router, private _loadingService: LoadingService) {
     }
 
     ngOnInit(): void {
@@ -26,6 +30,13 @@ export class LoginComponent implements OnInit {
                 state.provider === "MICROSOFT" ? this.getUserOutlook(state) : this.getUser(state);
             }
         });
+        this.listenToLoading();
+    }
+
+    listenToLoading(): void {
+        this._loadingService.loadingSub.pipe(delay(0)).subscribe((loading) => {
+            this.loading = loading;
+        })
     }
 
     formInit() {
