@@ -62,7 +62,7 @@ import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loadin
                 },
                 {
                     id: MicrosoftLoginProvider.PROVIDER_ID,
-                    provider: new MicrosoftLoginProvider('b7a2899a-d79e-489d-9c1f-ce1ff4d7f6ad', microsoftConfig)
+                    provider: new MicrosoftLoginProvider('4156d8d0-086d-4dad-a03a-14ce0919a084', microsoftConfig)
                 }
             ]
         }
@@ -72,7 +72,6 @@ import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loadin
             useClass: ServerErrorInterceptor,
             multi: true,
         },
-        ,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LoadingInterceptor,
