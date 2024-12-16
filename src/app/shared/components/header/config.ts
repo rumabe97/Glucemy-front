@@ -38,12 +38,13 @@ export const navConfig = [
         activePath: 'statistics',
         icon: faChartLine,
     },
-    {
-        name: 'Logout',
-        activePath: 'logout',
-        icon: faRightFromBracket
-    }
 ];
+
+export const logOutItem = {
+    name: 'Logout',
+    activePath: 'logout',
+    icon: faRightFromBracket
+}
 
 export const homeConfig = [
     {

@@ -2,8 +2,7 @@
     <app-loader></app-loader>
 </div>
 
-<app-header [user]="user"></app-header>
-<div class="mainContent">
-    <router-outlet></router-outlet>
-</div>
-<!--<app-footer></app-footer>-->
+<app-header [ngClass]="{'active': isSidebarOpen}" [user]="user" (stateChanged)="changeNav($event)"></app-header>
+<!--<div class="mainContent">-->
+<!--    <router-outlet></router-outlet>-->
+<!--</div>-->

@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {navConfig} from "./config";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {logOutItem, navConfig} from "./config";
 import {IUser} from "../../models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../core/services/auth/auth.service";
+import {faBars, faClose} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'app-header',
@@ -13,8 +14,13 @@ export class HeaderComponent implements OnInit {
 
     config = navConfig;
     view: string = 'Home';
+    isSidebarOpen: boolean = true;
+    hamburger = faBars;
+    close = faClose;
+    logOutItem: any = logOutItem;
 
     @Input() user: IUser;
+    @Output() stateChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private _router: Router, private _route: ActivatedRoute, private _authService: AuthService) {
     }
@@ -35,8 +41,13 @@ export class HeaderComponent implements OnInit {
 
     logOut() {
         this._authService.signOut();
-        setTimeout( () => {
+        setTimeout(() => {
             this._router.navigate(['/login']).then();
         });
+    }
+
+    toggleSidebar() {
+        this.isSidebarOpen = !this.isSidebarOpen;
+        this.stateChanged.emit(this.isSidebarOpen);
     }
 }

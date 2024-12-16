@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
 
     user: IUser;
     loading: boolean = false;
+    isSidebarOpen: boolean = true;
 
     constructor(private _route: ActivatedRoute, private _loadingService: LoadingService) {
         this.user = this._route.snapshot.data['response'];
@@ -26,5 +27,9 @@ export class MainComponent implements OnInit {
         this._loadingService.loadingSub.pipe(delay(0)).subscribe((loading) => {
             this.loading = loading;
         })
+    }
+
+    changeNav(status: boolean) {
+        this.isSidebarOpen = status;
     }
 }

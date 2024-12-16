@@ -1,22 +1,33 @@
-<div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-4 mb-4 bg-light">
-        <div class="media d-flex align-items-center gap-3">
-            <div class="media-body">
-                <h4 class="m-0">{{user?.first_name}} {{user?.last_name}}</h4>
-                <p class="font-weight-light text-muted mb-0">{{user?.email}}</p>
-            </div>
+<button *ngIf="!isSidebarOpen" class=" toggle-btn sidebar-h" (click)="toggleSidebar()">
+    <fa-icon [icon]="hamburger"></fa-icon>
+</button>
+<div class="sidebar-container" [class.sidebar-open]="isSidebarOpen">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="company-name">Glucemy</h1>
+            <button class="toggle-btn" (click)="toggleSidebar()">
+                <fa-icon [icon]="isSidebarOpen ? close : hamburger"></fa-icon>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li *ngFor="let item of config"
+                    [class.active]="view.toLocaleLowerCase() === item.name.toLocaleLowerCase()"
+                    (click)="changeView(item)">
+                    <fa-icon [icon]="item?.icon"></fa-icon>
+                    <span>{{ item.name }}</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" (click)="changeView(logOutItem)">
+                <fa-icon [icon]="logOutItem?.icon"></fa-icon>
+                <span>Logout</span>
+            </button>
         </div>
     </div>
-    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Glucemy</p>
+</div>
 
-    <ul class="nav flex-column bg-white mb-0 px-4">
-        <li class="nav-item cursor" *ngFor="let item of config">
-            <p class="nav-link text-dark font-italic "
-               [ngClass]="view.toLocaleLowerCase() === item.name.toLocaleLowerCase() ? 'bg-light' : ''"
-               (click)="changeView(item)">
-                <fa-icon [icon]="item?.icon"></fa-icon>
-                {{ item.name }}
-            </p>
-        </li>
-    </ul>
+<div class="main-content" [class.sidebar-open]="isSidebarOpen">
+        <router-outlet></router-outlet>
 </div>
