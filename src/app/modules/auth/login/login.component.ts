@@ -99,6 +99,10 @@ export class LoginComponent implements OnInit {
     }
 
     newUser() {
+        this.isSubmitted = true;
+        this.form.get('username').setValue(this.form.get('usernameRegister')?.value ?? '')
+        this.form.get('password').setValue(this.form.get('passwordRegister')?.value ?? '')
+        if (!this.form.valid) return;
         const registerUser: IRegister = {
             username: this.form.get('usernameRegister')?.value,
             password: this.form.get('passwordRegister')?.value,

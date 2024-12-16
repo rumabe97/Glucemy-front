@@ -5,7 +5,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" [formGroup]="form" (ngSubmit)="login()">
+            <form class="login100-form" [formGroup]="form" (ngSubmit)="login()">
                 <span class="login100-form-title p-b-43">Glucemy</span>
 
                 <ng-container *ngIf="!register; else formRegister">
@@ -92,7 +92,7 @@
                     </button>
                 </div>
 
-                <div class="text-center p-t-46 p-b-20">
+                <div class="text-center p-t-46">
 						<span class="txt2">
 							or sign up/in using
 						</span>
