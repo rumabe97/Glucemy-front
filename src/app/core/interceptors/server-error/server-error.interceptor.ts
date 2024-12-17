@@ -78,7 +78,9 @@ export class ServerErrorInterceptor implements HttpInterceptor {
                 ) {
                     return this.handle401Error(authReq, next);
                 }
-                this.error.handleError(error, error.error.detail);
+                const detail = error?.error ? error.error.detail : null;
+                console.log(error)
+                this.error.handleError(error, detail);
 
                 return throwError(error);
             })

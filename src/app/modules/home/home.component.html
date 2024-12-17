@@ -1,17 +1,17 @@
-<div class="content">
-    <div class="p-4 py-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="text-right customTitle">Welcome to Glucemy</h2>
+<main class="flex-grow-1 container py-4">
+    <h1 class="mb-4">Home</h1>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <app-current-glucose></app-current-glucose>
+        </div>
+        <div class="col-md-6">
+            <app-quick-entry></app-quick-entry>
+        </div>
+        <div class="col-12">
+            <app-recent-history></app-recent-history>
+        </div>
+        <div class="col-md-6">
+            <app-food-data></app-food-data>
         </div>
     </div>
-    <div class="cardContent scrollable">
-        <div class="data-card" *ngFor="let item of config" (click)="navigate(item)">
-            <fa-icon [icon]="item?.icon" size="3x" class="customIcon"></fa-icon>
-            <h4>{{item?.name}}</h4>
-            <span class="link-text">
-                Go to {{item?.name}}
-                <fa-icon [icon]="arrow"></fa-icon>
-            </span>
-        </div>
-    </div>
-</div>
+</main>

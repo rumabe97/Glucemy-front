@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Quick Entry</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <input
+                        type="number"
+                        [(ngModel)]="glucoseLevel"
+                        name="glucoseLevel"
+                        class="form-control"
+                        placeholder="Enter glucose level"
+                        required
+                />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Log Glucose Level</button>
+        </form>
+    </div>
+</div>

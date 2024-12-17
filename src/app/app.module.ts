@@ -13,7 +13,7 @@ import {MainComponent} from './shared/components/main/main.component';
 import {ServerErrorInterceptor} from "./core/interceptors/server-error/server-error.interceptor";
 import {HotToastModule} from "@ngneat/hot-toast";
 import {ProfileComponent} from './modules/profile/profile.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalculatorComponent} from './modules/calculator/calculator.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HomeComponent} from './modules/home/home.component';
@@ -23,6 +23,10 @@ import { RecordsComponent } from './modules/records/records.component';
 import { EditRecordComponent } from './modules/edit-record/edit-record.component';
 import {LoaderComponent} from "./shared/components/loader/loader.component";
 import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loading.interceptor";
+import { CurrentGlucoseComponent } from './modules/home/current-glucose/current-glucose.component';
+import { QuickEntryComponent } from './modules/home/quick-entry/quick-entry.component';
+import { RecentHistoryComponent } from './modules/home/recent-history/recent-history.component';
+import { FoodDataComponent } from './modules/home/food-data/food-data.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +39,11 @@ import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loadin
         HomeComponent,
         StatisticsComponent,
         RecordsComponent,
-        EditRecordComponent
+        EditRecordComponent,
+        CurrentGlucoseComponent,
+        QuickEntryComponent,
+        RecentHistoryComponent,
+        FoodDataComponent
     ],
     imports: [
         BrowserModule,
@@ -47,7 +55,8 @@ import {LoadingInterceptor} from "./core/interceptors/loading-interceptor/loadin
         HotToastModule.forRoot(),
         ReactiveFormsModule,
         FontAwesomeModule,
-        NgChartsModule
+        NgChartsModule,
+        FormsModule
     ],
     providers: [
         DatePipe,

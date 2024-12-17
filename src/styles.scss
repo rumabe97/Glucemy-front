@@ -10,3 +10,17 @@ body, html {
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+
+  &:hover {
+    background-color: #efefef;
+    width: 0.75rem;
+  }
+}

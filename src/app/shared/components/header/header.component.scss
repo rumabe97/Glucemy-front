@@ -107,16 +107,17 @@
   flex-grow: 1;
   padding: 20px;
   transition: margin-left 0.3s ease;
-  background-image: url("../../../../assets/img/loginImage.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-h {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 1vh;
+  left: 1vh;
   font-size: xx-large;
   z-index: 99999999999;
 }
@@ -137,6 +138,7 @@
   }
   .main-content {
     margin-left: 0 !important;
+    margin-top: 3rem;
   }
 }
 
