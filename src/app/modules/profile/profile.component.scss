@@ -20,8 +20,27 @@
 img {
   vertical-align: middle;
   border-style: none;
+  width: 15vh;
 }
 
+.form-group{
+  margin: 0 0 1rem 0;
+}
+.form-name{
+  display: flex;
+  gap: 1rem;
+  &_value{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+}
+.card {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  border: none;
+}
 .text-muted {
   color: #aeb0b4 !important;
 }

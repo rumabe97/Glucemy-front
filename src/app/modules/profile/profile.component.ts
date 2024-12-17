@@ -35,15 +35,12 @@ export class ProfileComponent implements OnInit {
     }
 
     updateUser() {
-        const user: IUser = {
-            ...this.form.value,
-            id: this.user.id
-        }
-        this._userService.update(user).subscribe(
+        this._userService.update(this.user).subscribe(
             (response) => {
                 this.user = response;
                 this._toastService.success('Profile updated successfully');
             }
         );
+        console.log(this.user)
     }
 }

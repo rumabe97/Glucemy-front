@@ -110,7 +110,7 @@
   transition: margin-left 0.3s ease;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -142,4 +142,3 @@
     margin-top: 3rem;
   }
 }
-

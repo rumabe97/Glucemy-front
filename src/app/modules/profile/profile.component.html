@@ -1,62 +1,49 @@
-<div class="content">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5 w-75" src="assets/img/user-2-1.svg" alt="user_image">
-                <span class="font-weight-bold">{{user?.first_name}} {{user?.last_name}}</span>
-                <span class="text-black-50">{{user?.email}}</span>
-                <span> </span>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Edit Your Profile</h2>
+        <p class="card-description">Update your personal information and preferences</p>
+    </div>
+    <div class="card-content">
+        <form (ngSubmit)="updateUser()">
+            <div class="form-group text-center">
+                <img [src]="'assets/img/user-2-1.svg'" alt="Profile photo" class="profile-photo">
+                <div class="mt-2">
+                    <label for="photo-upload" class="btn btn-outline-primary">
+                        <fa-icon [icon]="['fas', 'camera']"></fa-icon>
+                        Change Photo
+                    </label>
+                    <input id="photo-upload" type="file" accept="image/*" class="d-none">
+                </div>
             </div>
-        </div>
-        <form [formGroup]="form" (ngSubmit)="updateUser()" class="col-md-9">
-            <div class="p-3 py-5">
-                <div class="d-flex gap-3 align-items-center mb-3">
-                    <h4 class="text-right customTitle">Profile Settings</h4>
+            <div class="form-group form-name">
+                <div class="form-name_value">
+                    <label for="first_name">First Name</label>
+                    <input id="first_name" type="text" class="form-control" [(ngModel)]="user.first_name"
+                           name="first_name" required>
                 </div>
-                <div class="row customRow mt-2">
-                    <div class="wrap-input100 validate-input col-md-6 custom">
-                        <input class="input100" type="text" formControlName="first_name"
-                               [ngClass]="form.get('first_name')?.value ? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Firstname</span>
-                    </div>
-                    <div class="wrap-input100 validate-input col-md-6 custom">
-                        <input class="input100" type="text" formControlName="last_name"
-                               [ngClass]="form.get('last_name')?.value ? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Lastname</span>
-                    </div>
+                <div class="form-name_value">
+                    <label for="last_name">Last Name</label>
+                    <input id="last_name" type="text" class="form-control" [(ngModel)]="user.last_name" name="last_name"
+                           required>
                 </div>
-                <div class="row mt-3 px-3">
-                    <div class="wrap-input100 validate-input col-md-12">
-                        <input class="input100" type="email" formControlName="email"
-                               [ngClass]="form.get('email')?.value ? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Email</span>
-                    </div>
-                    <div class="wrap-input100 validate-input col-md-12">
-                        <input class="input100" type="number" formControlName="weight"
-                               [ngClass]="form.get('weight')?.value >=0? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Weight</span>
-                    </div>
-                    <div class="wrap-input100 validate-input col-md-12">
-                        <input class="input100" type="number" formControlName="height"
-                               [ngClass]="form.get('height')?.value >=0 ? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Height</span>
-                    </div>
-                    <div class="wrap-input100 validate-input col-md-12">
-                        <input class="input100" type="number" formControlName="age"
-                               [ngClass]="form.get('age')?.value >=0 ? 'has-val' :''">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Age</span>
-                    </div>
-                </div>
-                <button type="submit" class="login100-form-btn customButton">
-                    Save
-                </button>
             </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" class="form-control" [(ngModel)]="user.email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
+                <input id="weight" type="number" class="form-control" [(ngModel)]="user.weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height</label>
+                <input id="height" type="number" class="form-control" [(ngModel)]="user.height" name="height" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input id="age" type="number" class="form-control" [(ngModel)]="user.age" name="age" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 </div>
