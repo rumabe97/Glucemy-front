@@ -53,7 +53,6 @@ export class ServerErrorInterceptor implements HttpInterceptor {
         }
     }
 
-    // intercept function
     public intercept(
         request: HttpRequest<any>,
         next: HttpHandler
@@ -67,10 +66,8 @@ export class ServerErrorInterceptor implements HttpInterceptor {
         }
         ServerErrorInterceptor.setHeaders(authReq);
 
-        // returning an observable to complete the request cycle
         return next.handle(authReq).pipe(
             catchError((error) => {
-                console.log('Error: ' + error);
                 if (
                     error instanceof HttpErrorResponse &&
                     !authReq.url.includes('auth/') &&
@@ -79,16 +76,13 @@ export class ServerErrorInterceptor implements HttpInterceptor {
                     return this.handle401Error(authReq, next);
                 }
                 const detail = error?.error ? error.error.detail : null;
-                console.log(error)
                 this.error.handleError(error, detail);
-
                 return throwError(error);
             })
         );
     }
 
     private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-        console.log('Handle 401');
         if (!this.isRefreshing) {
             this.isRefreshing = true;
             this.refreshTokenSubject.next(null);

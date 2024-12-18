@@ -16,10 +16,8 @@ export class HandleErrorServiceService {
         let errorMessage: string;
         let sendError: boolean = true;
         if (err.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
             errorMessage = `An error occurred: ${err.error.message}`;
         } else {
-            // The backend returned an unsuccessful response code.
             switch (err.status) {
                 case 400:
                     errorMessage = 'Bad Request.';
