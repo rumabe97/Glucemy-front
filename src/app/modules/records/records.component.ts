@@ -5,7 +5,6 @@ import {faArrowRight, faBowlFood, faMugSaucer} from "@fortawesome/free-solid-svg
 import {faUtensils} from "@fortawesome/free-solid-svg-icons/faUtensils";
 import {faBreadSlice} from "@fortawesome/free-solid-svg-icons/faBreadSlice";
 import {faCoffee} from "@fortawesome/free-solid-svg-icons/faCoffee";
-import {FormControl} from "@angular/forms";
 import {RecordsService} from 'src/app/core/services/records/records.service';
 import {DatePipe} from "@angular/common";
 
@@ -16,6 +15,8 @@ import {DatePipe} from "@angular/common";
 })
 export class RecordsComponent implements OnInit {
     data: IRecords[] = [];
+    date: string = new Date().toISOString().slice(0, 10);
+
     brekfastIcon = faMugSaucer
     lunchIcon = faBowlFood
     dinnerIcon = faUtensils;
@@ -24,23 +25,20 @@ export class RecordsComponent implements OnInit {
 
     arrow = faArrowRight;
 
-    date: FormControl;
+    showAddRecord: boolean = false;
 
     constructor(private _route: ActivatedRoute, private _recordsService: RecordsService, private datePipe: DatePipe, private _router: Router) {
     }
 
     ngOnInit(): void {
         this.data = this._route.snapshot.data['response'];
-        this.date = new FormControl(new Date().toISOString().slice(0, 10));
-
-        this.date.valueChanges.subscribe(() => {
-            this.changeDate();
-        });
 
     }
 
-    changeDate() {
-        this._recordsService.findByday(this.datePipe.transform(new Date(this.date.value), "yyyy-MM-dd")).subscribe(res => {
+    changeDate(event: Event) {
+        this.date = (event.target as HTMLInputElement).value;
+
+        this._recordsService.findByday(this.datePipe.transform(new Date(this.date), "yyyy-MM-dd")).subscribe(res => {
             this.data = res;
         });
     }
@@ -49,14 +47,16 @@ export class RecordsComponent implements OnInit {
         this._router.navigate(['../records/new'], {relativeTo: this._route}).then();
     }
 
-    navigate(item:any){
+    navigate(item: any) {
         this._router.navigate([`app/records/${item?.id}`]).then();
     }
+
     getIcon(type: string): any {
-        if (type === 'Desayuno') return this.brekfastIcon;
-        if (type === 'Almuerzo') return this.almuerzoIcon;
-        if (type === 'Merienda') return this.meriendaIcon;
-        if (type === 'Cena') return this.dinnerIcon;
+        if (type === 'Breakfast') return this.brekfastIcon;
+        if (type === 'Mid-Morning Snack') return this.almuerzoIcon;
+        if (type === 'Afternoon Snack') return this.meriendaIcon;
+        if (type === 'Late-Night Snack') return this.meriendaIcon;
+        if (type === 'Dinner') return this.dinnerIcon;
         return this.lunchIcon;
     }
 }

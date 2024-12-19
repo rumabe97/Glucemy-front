@@ -1,29 +1,120 @@
-@import "src/app/modules/auth/login/login.component";
-@import "src/app/modules/calculator/calculator.component";
-
-.result{
-  margin: 0;
+:host {
+  display: flex;
 }
 
-.form_content_small{
-  max-height: 12rem;
-  overflow-y: auto;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.custom {
-  width: 46%;
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 20px;
 }
 
-.customRow {
-  gap: 1.7rem;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group{
+  margin: 0 0 1rem 0;
+}
+
+.food-entry {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.remove-button {
+  background-color: #ff3b30;
+  color: white;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  align-self: flex-end;
+
+  &:hover {
+    background-color: #ff453a;
+  }
+}
+
+.add-button, .submit-button {
+  background-color: #0071e3;
+  color: white;
+  font-size: 17px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: #0077ed;
+  }
+
+  &:active {
+    background-color: #006edb;
+  }
+
+  &:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+}
+
+.results-container {
+  display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.fix{
-  width: 98%;
-  margin: 0.3rem;
+.result {
+  flex: 1;
+  background-color: #f5f5f7;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-.form_content_small{
-  overflow-x: hidden;
+.result-label {
+  font-size: 14px;
+  color: #86868b;
+  margin-bottom: 5px;
 }
+
+.result-value, .result-input {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.result-input {
+  width: 100%;
+  text-align: center;
+}
+
+.glycemicIndexHard {
+  background: #ff202045;
+}
+
+.glycemicIndexLow{
+  background:#34e36245;
+}
+
+.glycemicIndexMedium{
+  background:#ddf32e45;
+}
+

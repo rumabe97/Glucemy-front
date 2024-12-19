@@ -7,6 +7,7 @@ import {IRecords} from "../../shared/models/records.model";
 import {RecordsService} from "../../core/services/records/records.service";
 import {HotToastService} from "@ngneat/hot-toast";
 import {ActivatedRoute, Router} from "@angular/router";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'app-edit-record',
@@ -16,14 +17,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class EditRecordComponent implements OnInit {
 
     form: FormGroup;
-    currentPhaseDay: any;
     phasesDay: any[] = [];
 
-    entries: FormArray;
-
     foods: IFood[];
-    currentFood: any = [];
     entryError: boolean = false;
+    deleteIcon = faTrash;
     rations: number;
 
     record: IRecords;
@@ -34,24 +32,48 @@ export class EditRecordComponent implements OnInit {
                 private _toastService: HotToastService, private _router: Router, private _route: ActivatedRoute) {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.record = this._route.snapshot.data['response'];
-        this.currentPhaseDay = this.record?.phasesDay?.name ?? '';
-        console.log(this.record);
-        this.formInit();
-        this.formFoodInit();
+        this.createForm();
         this.searchPhase('');
-        this.bolus = new FormControl(this.record?.bolus ?? '');
-        this.rations = this.record?.hc_rations ?? 0;
-
     }
 
-    formInit() {
+    createForm() {
         this.form = this._fb.group({
-            phaseDay: [this.record?.phasesDay?.name ?? ''],
-            blood_glucose: [this.record?.blood_glucose ?? ''],
+            phaseDay: [this.record?.phasesDay?.name ?? '', Validators.required],
+            bloodGlucose: [this.record?.blood_glucose ?? '', [Validators.required, Validators.min(0)]],
             annotations: [this.record?.annotations ?? ''],
+            bolus: [this.record?.bolus ?? '', [Validators.required, Validators.min(0)]],
+            foodEntries: this._fb.array(this.record?.foods.map((f) => this.createFoodEntry(f)) || []),
         });
+    }
+
+    createFoodEntry(value?: IFood,): FormGroup {
+        this.searchFood('');
+        return this._fb.group({
+            name: [value?.name ?? '', Validators.required],
+            usualMeasure: [value?.usual_measure ?? '', [Validators.required, Validators.min(0)]],
+            hcRations: [value?.hc_rations ?? '', [Validators.required, Validators.min(0)]],
+            index: [value?.glycemic_index ?? ''],
+            id: [value?.id ?? ''],
+        });
+    }
+
+    get foodEntries() {
+        return this.form.get('foodEntries') as FormArray;
+    }
+
+    addFoodEntry(value?: IFood,) {
+        if (this.foodEntries.invalid) {
+            this.foodEntries.markAllAsTouched();
+            this.entryError = true;
+            return;
+        }
+        this.foodEntries.push(this.createFoodEntry(value));
+    }
+
+    removeFoodEntry(index: number) {
+        this.foodEntries.removeAt(index);
     }
 
     searchPhase(value: any) {
@@ -60,56 +82,29 @@ export class EditRecordComponent implements OnInit {
         });
     }
 
-    formFoodInit() {
-        this.entries = this._fb.array([]);
-        if (!this.record) return this.addEntry();
-        this.record?.foods.map((f, index) => this.addEntry(f, index));
-    }
-
-    addEntry(value?: IFood, index?: number) {
-        if (this.entries.invalid) {
-            this.entries.markAllAsTouched();
-            this.entryError = true;
-            return;
-        }
-        if (value) this.currentFood[index] = value?.name;
-        const entry = this._fb.group({
-            name: [value?.name ?? '', Validators.required],
-            usual_measure: [value?.usual_measure ?? '', Validators.required],
-            hc_rations: [value?.hc_rations ?? '', Validators.required],
-            index: [value?.glycemic_index ?? ''],
-            id: [value?.id ?? ''],
-        });
-        this.entryError = false;
-        this.entries.push(entry);
-        this.searchFood('');
-    }
-
-    setOption(entry: any, option: any) {
-        this.entryError = false;
-        const food = this.foods.find(f => f.name === option);
-        entry.get('usual_measure').setValue(food?.usual_measure ?? '');
-        entry.get('index').setValue(food?.glycemic_index ?? '');
-        entry.get('hc_rations').setValue(food?.hc_rations ?? '');
-        entry.get('id').setValue(food?.id ?? '');
-    }
-
     searchFood(value: any) {
-        this._foodService.search({search: value, page: 1}).subscribe(response => {
+        const name = value ? value.controls.name.value : '';
+        this._foodService.search({search: name, page: 1}).subscribe(response => {
             this.foods = response.results;
         });
     }
 
-    getId(index: number): string {
-        return 'productList' + index;
+
+    getRecommendedRations(): number {
+        return this.foodEntries.controls.reduce((sum, entry) => {
+            const rations = entry.get('usualMeasure')?.value / entry.get('hcRations')?.value;
+            this.rations = sum + (isNaN(rations) ? 0 : rations);
+            return sum + (isNaN(rations) ? 0 : rations);
+        }, 0);
     }
 
-    getRations() {
-        let values = this.entries.controls.map(e => e.get('usual_measure').value / e.get('hc_rations').value);
-        values = values.map(v => isNaN(v) ? 0 : v);
-        this.rations = values.reduce((a, b) => a + b, 0);
-        if (isNaN(this.rations)) return 0;
-        return this.rations;
+    setOption(entry: any) {
+        this.entryError = false;
+        const food = this.foods.find(f => f.name === entry.controls.name.value);
+        entry.get('usualMeasure').setValue(food?.usual_measure ?? '');
+        entry.get('index').setValue(food?.glycemic_index ?? '');
+        entry.get('hcRations').setValue(food?.hc_rations ?? '');
+        entry.get('id').setValue(food?.id ?? '');
     }
 
     getBackground(value: number) {
@@ -120,14 +115,14 @@ export class EditRecordComponent implements OnInit {
     }
 
     save() {
-        if (this.form.valid && this.entries.value) {
-            const carbohydrates = this.entries.controls.map(e => e.get('usual_measure').value);
+        if (this.form.valid && this.foodEntries.value) {
+            const carbohydrates = this.foodEntries.controls.map(e => e.get('usualMeasure').value);
             const record: IRecords = {
-                idPhaseDay: this.phasesDay.find(p => p.name === this.currentPhaseDay)?.id,
+                idPhaseDay: this.phasesDay.find(p => p.name === this.form.get('phaseDay').value)?.id,
                 carbohydrates: carbohydrates.reduce((a, b) => a + b, 0),
                 hc_rations: this.rations,
-                bolus: this.bolus.value,
-                idFoods: this.entries.controls.map(e => e.get('id').value),
+                bolus: this.form.get('bolus').value,
+                idFoods: this.foodEntries.controls.map(e => e.get('id').value),
                 id: this.record?.id ?? '',
                 ...this.form.value
             }
