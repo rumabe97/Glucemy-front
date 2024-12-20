@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IFood} from "../../shared/models/food.model";
 import {FoodService} from "../../core/services/food/food.service";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {IRecords} from "../../shared/models/records.model";
 
 @Component({
     selector: 'app-calculator',
@@ -11,68 +12,80 @@ import {FoodService} from "../../core/services/food/food.service";
 })
 export class CalculatorComponent implements OnInit {
 
-    entries: FormArray;
+    form: FormGroup;
+    state: any;
 
     foods: IFood[];
-    currentFood: IFood[] = [];
     entryError: boolean = false;
-    rations: number = 0;
+    deleteIcon = faTrash;
 
-    constructor(private _router: ActivatedRoute, private _fb: FormBuilder, private _foodService: FoodService) {
+    record: IRecords;
+
+    constructor(private _fb: FormBuilder,
+                private _foodService: FoodService) {
     }
 
-    ngOnInit(): void {
-        this.foods = this._router.snapshot.data['response']?.results;
-        this.formInit();
+    ngOnInit() {
+        this.createForm();
     }
 
-    formInit() {
-        this.entries = this._fb.array([]);
-        this.addEntry();
+    createForm() {
+        this.form = this._fb.group({
+            foodEntries: this._fb.array([this.createFoodEntry()]),
+        });
     }
 
-    addEntry() {
-        if (this.entries.invalid) {
-            this.entries.markAllAsTouched();
+    createFoodEntry(value?: IFood, index?: number, isNew: boolean = true): FormGroup {
+        this.searchFood('');
+        const usualMeasure = isNew ? value?.usual_measure : this.record.carbohydrates[index];
+        return this._fb.group({
+            name: [value?.name ?? '', Validators.required],
+            usualMeasure: [usualMeasure, [Validators.required, Validators.min(0)]],
+            hcRations: [value?.hc_rations ?? '', [Validators.required, Validators.min(0)]],
+            index: [value?.glycemic_index ?? ''],
+            id: [value?.id ?? ''],
+        });
+    }
+
+    get foodEntries() {
+        return this.form.get('foodEntries') as FormArray;
+    }
+
+    addFoodEntry(value?: IFood,) {
+        if (this.foodEntries.invalid) {
+            this.foodEntries.markAllAsTouched();
             this.entryError = true;
             return;
         }
-
-        const entry = this._fb.group({
-            name: ['', Validators.required],
-            usual_measure: ['', Validators.required],
-            hc_rations: [''],
-            index: [''],
-        });
-        this.entryError = false;
-        this.entries.push(entry);
-        this.searchFood('');
+        this.foodEntries.push(this.createFoodEntry(value));
     }
 
-    setOption(entry: any, option: any) {
-        this.entryError = false;
-        const food = this.foods.find(f => f.name === option);
-        entry.get('usual_measure').setValue(food?.usual_measure ?? '');
-        entry.get('index').setValue(food?.glycemic_index ?? '');
-        entry.get('hc_rations').setValue(food?.hc_rations ?? '');
+    removeFoodEntry(index: number) {
+        this.foodEntries.removeAt(index);
     }
+
 
     searchFood(value: any) {
-        this._foodService.search({search: value, page: 1}).subscribe(response => {
+        const name = value ? value.controls.name.value : '';
+        this._foodService.search({search: name, page: 1}).subscribe(response => {
             this.foods = response.results;
         });
     }
 
-    getId(index: number): string {
-        return 'productList' + index;
+    getRecommendedRations(): number {
+        return this.foodEntries.controls.reduce((sum, entry) => {
+            const rations = entry.get('usualMeasure')?.value / entry.get('hcRations')?.value;
+            return sum + (isNaN(rations) ? 0 : rations);
+        }, 0);
     }
 
-    getRations() {
-        let values = this.entries.controls.map(e => e.get('usual_measure').value / e.get('hc_rations').value);
-        values = values.map(v => isNaN(v) ? 0 : v);
-        this.rations = values.reduce((a, b) => a + b, 0);
-        if (isNaN(this.rations)) return 0;
-        return this.rations;
+    setOption(entry: any) {
+        this.entryError = false;
+        const food = this.foods.find(f => f.name === entry.controls.name.value);
+        entry.get('usualMeasure').setValue(food?.usual_measure ?? '');
+        entry.get('index').setValue(food?.glycemic_index ?? '');
+        entry.get('hcRations').setValue(food?.hc_rations ?? '');
+        entry.get('id').setValue(food?.id ?? '');
     }
 
     getBackground(value: number) {

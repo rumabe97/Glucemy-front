@@ -1,113 +1,122 @@
-@import "src/app/modules/auth/login/login.component";
+:host {
+  display: flex;
+}
 
-.content {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 32px 0 rgb(0 0 0 / 37%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0 2rem 2rem 2rem;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin: 0 0 1rem 0;
+}
+
+.food-entry {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #6767672b;
+}
+
+.remove-button {
+  background-color: #ff3b30;
+  color: white;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  align-self: flex-end;
+
+  &:hover {
+    background-color: #ff453a;
+  }
+}
+
+.add-button, .submit-button {
+  background-color: #0071e3;
+  color: white;
+  font-size: 17px;
+  padding: 12px 20px;
+  border: none;
   border-radius: 10px;
-  max-width: 64rem;
-}
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 20px;
 
-.scrollable {
-  &::-webkit-scrollbar-thumb {
-    background-color: #8c8c8c;
-    border-radius: 15px;
+  &:hover {
+    background-color: #0077ed;
   }
 
-  &::-webkit-scrollbar {
-    width: 0.5rem;
+  &:active {
+    background-color: #006edb;
+  }
 
-    &:hover {
-      background-color: #8c8c8c;
-      width: 0.75rem;
-    }
+  &:disabled {
+    background-color: #999;
+    cursor: not-allowed;
   }
 }
 
-.customTitle {
-  font-weight: bold;
-  font-size: 1.25rem;
-}
-
-.mediumInput {
-  width: 40%;
-}
-
-.smallInput {
-  width: 15%;
-}
-
-.wrap-input100 {
-  border: 1px solid #9b9595;
-}
-
-.customButton {
-  width: 16%;
-  color: #6675df;
-  background: transparent;
-  border-bottom: 1px solid #6675df;
-  font-size: 1rem;
-  height: 37px;
-  letter-spacing: 0;
-  border-radius: 0;
-}
-
-.login100-form-btn:hover {
-  background: transparent;
-  color: #6675df;
-  font-size: 1.1rem;
-}
-
-.error {
-  color: red;
-  font-size: 0.8rem;
-  margin: 0;
-  text-align: end;
-  padding: 0 1rem;
-}
-
-.form_content {
-  max-height: 24rem;
-  overflow-y: auto;
-  overflow-x: hidden;
+.results-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .result {
-  width: 32%;
-  margin: 1rem auto auto;
+  flex: 1;
+  background-color: #f5f5f7;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+.result-label {
+  font-size: 14px;
+  color: #86868b;
+  margin-bottom: 5px;
+}
+
+.result-value, .result-input {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.result-input {
+  width: 100%;
+  text-align: center;
 }
 
 .glycemicIndexHard {
   background: #ff202045;
 }
 
-.glycemicIndexLow{
-    background:#34e36245;
+.glycemicIndexLow {
+  background: #34e36245;
 }
 
-.glycemicIndexMedium{
-    background:#ddf32e45;
+.glycemicIndexMedium {
+  background: #ddf32e45;
 }
 
-@media (max-width: 768px) {
-  .mediumInput, .smallInput {
-    width: 100%;
-  }
-
-  .content{
-    max-width: 90vw;
-  }
-
-  .result{
-    width: 56%;
-  }
-}

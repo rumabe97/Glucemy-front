@@ -37,7 +37,6 @@ export class EditRecordComponent implements OnInit {
     ngOnInit() {
         this.record = this._route.snapshot.data['response'];
         this.state = history.state;
-        console.log(this.state)
         this.createForm();
         this.searchPhase('');
     }
