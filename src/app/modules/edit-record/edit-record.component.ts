@@ -8,6 +8,7 @@ import {RecordsService} from "../../core/services/records/records.service";
 import {HotToastService} from "@ngneat/hot-toast";
 import {ActivatedRoute, Router} from "@angular/router";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-edit-record',
@@ -18,6 +19,7 @@ export class EditRecordComponent implements OnInit {
 
     form: FormGroup;
     phasesDay: any[] = [];
+    state: any;
 
     foods: IFood[];
     entryError: boolean = false;
@@ -29,11 +31,13 @@ export class EditRecordComponent implements OnInit {
 
     constructor(private _fb: FormBuilder, private _phaseDayService: PhasesDayService,
                 private _foodService: FoodService, private _recordService: RecordsService,
-                private _toastService: HotToastService, private _router: Router, private _route: ActivatedRoute) {
+                private _toastService: HotToastService, private _router: Router, private _route: ActivatedRoute, private datePipe: DatePipe) {
     }
 
     ngOnInit() {
         this.record = this._route.snapshot.data['response'];
+        this.state = history.state;
+        console.log(this.state)
         this.createForm();
         this.searchPhase('');
     }
@@ -48,7 +52,7 @@ export class EditRecordComponent implements OnInit {
         });
     }
 
-    createFoodEntry(value?: IFood, index?: number, isNew:boolean = true): FormGroup {
+    createFoodEntry(value?: IFood, index?: number, isNew: boolean = true): FormGroup {
         this.searchFood('');
         const usualMeasure = isNew ? value?.usual_measure : this.record.carbohydrates[index];
         return this._fb.group({
@@ -133,6 +137,7 @@ export class EditRecordComponent implements OnInit {
                 id: this.record?.id ?? '',
                 ...this.form.value
             }
+            if (this.state?.date && !record.id) this.record.created_date = this.datePipe.transform(new Date(this.state.date), "yyyy-MM-dd");
             const $action = this.record ? this._recordService.update(record) : this._recordService.create(record);
             $action.subscribe(() => {
                 this._toastService.success(`Record ${this.record ? 'updated' : 'created'} successfully`);

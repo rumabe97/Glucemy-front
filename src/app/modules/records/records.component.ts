@@ -44,7 +44,7 @@ export class RecordsComponent implements OnInit {
     }
 
     newRecord() {
-        this._router.navigate(['../records/new'], {relativeTo: this._route}).then();
+        this._router.navigate(['../records/new'], {relativeTo: this._route,  state: { date: this.date}}).then();
     }
 
     navigate(item: any) {
