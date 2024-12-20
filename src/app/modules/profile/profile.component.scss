@@ -17,20 +17,24 @@ img {
   vertical-align: middle;
   border-style: none;
   width: 15vh;
+  border-radius: 50%;
 }
 
-.form-group{
-  margin: 0 0 1rem 0;
+.form-group {
+  margin: 1rem 0;
 }
-.form-name{
+
+.form-name {
   display: flex;
   gap: 1rem;
-  &_value{
+
+  &_value {
     display: flex;
     flex: 1;
     flex-direction: column;
   }
 }
+
 .card {
   width: 100%;
   height: 100%;
@@ -39,6 +43,7 @@ img {
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
 }
+
 .text-muted {
   color: #aeb0b4 !important;
 }

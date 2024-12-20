@@ -7,6 +7,7 @@ export interface  IUser{
     weight: number;
     height: number;
     age: number;
+    profile_image:string;
 
     favourites?: any[];
     records:any[];

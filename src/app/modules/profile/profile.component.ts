@@ -4,6 +4,7 @@ import {IUser} from "../../shared/models/user.model";
 import {UserService} from "../../core/services/user/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";
+import {faCamera} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'app-profile',
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
     user: IUser;
 
     form: FormGroup;
+    iconCamera = faCamera;
 
     constructor(private _formBuilder: FormBuilder, private _userService: UserService, private _route: ActivatedRoute, private _toastService: HotToastService) {
     }
@@ -41,6 +43,20 @@ export class ProfileComponent implements OnInit {
                 this._toastService.success('Profile updated successfully');
             }
         );
-        console.log(this.user)
+    }
+
+    onFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                this.user.profile_image = reader.result as string;
+            };
+
+            reader.readAsDataURL(file);
+        }
     }
 }

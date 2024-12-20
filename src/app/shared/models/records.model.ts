@@ -4,7 +4,7 @@ import {IUser} from "./user.model";
 export interface IRecords {
     id: string;
     blood_glucose: number;
-    carbohydrates: number;
+    carbohydrates: number[];
     annotations: string;
     hc_rations: number;
     bolus: number;
