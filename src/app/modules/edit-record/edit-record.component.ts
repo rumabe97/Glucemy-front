@@ -44,15 +44,16 @@ export class EditRecordComponent implements OnInit {
             bloodGlucose: [this.record?.blood_glucose ?? '', [Validators.required, Validators.min(0)]],
             annotations: [this.record?.annotations ?? ''],
             bolus: [this.record?.bolus ?? '', [Validators.required, Validators.min(0)]],
-            foodEntries: this._fb.array(this.record?.foods.map((f) => this.createFoodEntry(f)) || []),
+            foodEntries: this._fb.array(this.record?.foods.map((f, index) => this.createFoodEntry(f, index, false)) || []),
         });
     }
 
-    createFoodEntry(value?: IFood,): FormGroup {
+    createFoodEntry(value?: IFood, index?: number, isNew:boolean = true): FormGroup {
         this.searchFood('');
+        const usualMeasure = isNew ? value?.usual_measure : this.record.carbohydrates[index];
         return this._fb.group({
             name: [value?.name ?? '', Validators.required],
-            usualMeasure: [value?.usual_measure ?? '', [Validators.required, Validators.min(0)]],
+            usualMeasure: [usualMeasure, [Validators.required, Validators.min(0)]],
             hcRations: [value?.hc_rations ?? '', [Validators.required, Validators.min(0)]],
             index: [value?.glycemic_index ?? ''],
             id: [value?.id ?? ''],
@@ -115,11 +116,17 @@ export class EditRecordComponent implements OnInit {
     }
 
     save() {
-        if (this.form.valid && this.foodEntries.value) {
-            const carbohydrates = this.foodEntries.controls.map(e => e.get('usualMeasure').value);
+        if (this.form.valid && this.foodEntries.valid && this.foodEntries.length > 0) {
+            const sortedControls = this.foodEntries.controls.sort((a, b) => {
+                const idA = a.get('id')?.value || 0;
+                const idB = b.get('id')?.value || 0;
+                return idB - idA;
+            });
+            const carbohydrates = sortedControls.map(v => v.get('usualMeasure')?.value);
+
             const record: IRecords = {
                 idPhaseDay: this.phasesDay.find(p => p.name === this.form.get('phaseDay').value)?.id,
-                carbohydrates: carbohydrates.reduce((a, b) => a + b, 0),
+                carbohydrates,
                 hc_rations: this.rations,
                 bolus: this.form.get('bolus').value,
                 idFoods: this.foodEntries.controls.map(e => e.get('id').value),

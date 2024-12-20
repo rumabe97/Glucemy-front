@@ -60,6 +60,6 @@
             </div>
         </div>
 
-        <button type="submit" class="submit-button" [disabled]="!form.valid">Save Record</button>
+        <button type="submit" class="submit-button" [disabled]="!form.valid || foodEntries.invalid || this.foodEntries.length === 0">Save Record</button>
     </form>
 </div>

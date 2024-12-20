@@ -20,7 +20,7 @@ export class RecordsService {
 
     update(records: IRecords) {
         return this._httpClient.put<IRecords>(
-            `${this.url}${records?.id}`, _clean(records)
+            `${this.url}${records?.id}/`, _clean(records)
         );
     }
 
