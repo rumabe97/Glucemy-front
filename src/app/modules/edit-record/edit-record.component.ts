@@ -126,9 +126,10 @@ export class EditRecordComponent implements OnInit {
                 return idB - idA;
             });
             const carbohydrates = sortedControls.map(v => v.get('usualMeasure')?.value);
+            const phaseDay = this.phasesDay.find(p => p.name === this.form.get('phaseDay').value);
 
             const record: IRecords = {
-                idPhaseDay: this.phasesDay.find(p => p.name === this.form.get('phaseDay').value)?.id,
+                idPhaseDay: phaseDay.id,
                 carbohydrates,
                 hc_rations: this.rations,
                 bolus: this.form.get('bolus').value,
@@ -137,13 +138,32 @@ export class EditRecordComponent implements OnInit {
                 blood_glucose: this.form.get('bloodGlucose').value,
                 ...this.form.value
             }
-            if (this.state?.date && !record.id) record.created_date = this.datePipe.transform(new Date(this.state.date), "yyyy-MM-dd");
-            console.log(record)
+            if (this.state?.date && !record.id) record.created_date = this.formatDateWithPhase(this.state.date, phaseDay.name);
             const $action = this.record ? this._recordService.update(record) : this._recordService.create(record);
             $action.subscribe(() => {
                 this._toastService.success(`Record ${this.record ? 'updated' : 'created'} successfully`);
                 this._router.navigate(['../'], {relativeTo: this._route}).then();
             });
         }
+    }
+
+    formatDateWithPhase(date: string, phase: string): string {
+        const phaseTimes: { [key: string]: { hours: number; minutes: number } } = {
+            'Breakfast': {hours: 8, minutes: 0},
+            'Mid-Morning Snack': {hours: 11, minutes: 0},
+            'Lunch': {hours: 14, minutes: 0},
+            'Afternoon Snack': {hours: 17, minutes: 30},
+            'Dinner': {hours: 21, minutes: 0},
+            'Late-Night Snack': {hours: 23, minutes: 0},
+        };
+
+        const selectedTime = phaseTimes[phase];
+        if (!selectedTime) {
+            return '';
+        }
+
+        const parsedDate = new Date(date);
+        parsedDate.setHours(selectedTime.hours, selectedTime.minutes, 0, 0);
+        return this.datePipe.transform(parsedDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ') || '';
     }
 }
