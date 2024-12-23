@@ -1,48 +1,30 @@
-@import "src/app/modules/auth/login/login.component";
-
-.content {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 32px 0 rgb(0 0 0 / 37%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0 2rem 2rem 2rem;
-  border-radius: 10px;
-  position: relative;
-  width: 56vw
+.card {
+  border:none
 }
 
-.customButton {
-  width: 16%;
-  color: #6675df;
-  background: transparent;
-  border-bottom: 1px solid #6675df;
-  font-size: 1rem;
-  height: 37px;
-  letter-spacing: 0;
-  border-radius: 0;
+.card-header {
+  background-color: transparent;
+  border: none;
 }
 
-.login100-form-btn:hover {
-  background: transparent;
-  color: #6675df;
-  font-size: 1.1rem;
-}
+.btn-primary {
+  background-color: #6675df;
+  border-color: #6675df;
 
-.customTitle {
-  font-weight: bold;
-  font-size: 1.25rem;
-}
-
-.wrap-input100 {
-  border: 1px solid #9b9595;
-}
-
-.smallInput {
-  width: 45%;
-}
-
-@media (max-width: 768px) {
-  .content {
-    width: 90vw;
+  &:hover {
+    background-color: darken(#6675df, 10%);
+    border-color: darken(#6675df, 10%);
   }
+}
+
+.form-control:focus {
+  border-color: #6675df;
+  box-shadow: 0 0 0 0.2rem rgba(102, 117, 223, 0.25);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 20px;
 }

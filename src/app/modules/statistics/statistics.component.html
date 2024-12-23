@@ -1,25 +1,33 @@
-<div class="chart-container content">
-    <div class="p-4 py-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right customTitle">Statistics
-            </h4>
-            <button type="button" class="login100-form-btn customButton" (click)="download()">
-                Download
-            </button>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="title">Statistics</h1>
+            <button class="btn btn-primary" (click)="download()">Download</button>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="start-date" class="form-label">Start Date</label>
+                    <input
+                            id="start-date"
+                            type="date"
+                            class="form-control"
+                            [formControl]="start_date"
+                    >
+                </div>
+                <div class="col-md-6">
+                    <label for="end-date" class="form-label">End Date</label>
+                    <input
+                            id="end-date"
+                            type="date"
+                            class="form-control"
+                            [formControl]="end_date"
+                    >
+                </div>
+            </div>
+            <div class="chart-container" style="position: relative; height:60vh; width:100%">
+                <canvas #chart></canvas>
+            </div>
         </div>
     </div>
-
-    <div class="d-flex justify-content-around">
-        <div class="wrap-input100 validate-input col-md-6 smallInput">
-            <input class="input100 has-val" type="date" [formControl]="end_date">
-            <span class="focus-input100"></span>
-            <span class="label-input100">Start date</span>
-        </div>
-        <div class="wrap-input100 validate-input col-md-6 smallInput">
-            <input class="input100 has-val" type="date" [formControl]="start_date">
-            <span class="focus-input100"></span>
-            <span class="label-input100">End date</span>
-        </div>
-    </div>
-    <canvas #chart></canvas>
 </div>

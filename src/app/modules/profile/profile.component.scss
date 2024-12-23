@@ -44,6 +44,9 @@ img {
   padding-bottom: 1.5rem !important;
 }
 
+.card-header {
+  background: transparent;
+}
 .text-muted {
   color: #aeb0b4 !important;
 }
@@ -133,6 +136,13 @@ img {
   background: transparent;
   color: #6675df;
   font-size: 1.1rem;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
