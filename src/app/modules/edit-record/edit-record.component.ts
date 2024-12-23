@@ -134,9 +134,11 @@ export class EditRecordComponent implements OnInit {
                 bolus: this.form.get('bolus').value,
                 idFoods: this.foodEntries.controls.map(e => e.get('id').value),
                 id: this.record?.id ?? '',
+                blood_glucose: this.form.get('bloodGlucose').value,
                 ...this.form.value
             }
-            if (this.state?.date && !record.id) this.record.created_date = this.datePipe.transform(new Date(this.state.date), "yyyy-MM-dd");
+            if (this.state?.date && !record.id) record.created_date = this.datePipe.transform(new Date(this.state.date), "yyyy-MM-dd");
+            console.log(record)
             const $action = this.record ? this._recordService.update(record) : this._recordService.create(record);
             $action.subscribe(() => {
                 this._toastService.success(`Record ${this.record ? 'updated' : 'created'} successfully`);
