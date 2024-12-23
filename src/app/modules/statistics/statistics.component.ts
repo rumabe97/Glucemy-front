@@ -27,11 +27,20 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
         this.chartConfig = new Chart(this.chart.nativeElement, this.lineChartData);
     }
 
+    getLabels(labels: string[]) {
+        const groupedData: string[] = [];
+        labels.forEach((label: string) => {
+            const date = this.datePipe.transform(new Date(label), 'yyyy-MM-dd: HH:mm')
+            groupedData.push(date);
+        });
+        return groupedData;
+    }
+
     ngOnInit(): void {
         const data = this._route.snapshot.data['response'];
         this.lineChartData['data'].datasets[0].data = data.blood_glucose_data;
         this.lineChartData['data'].datasets[1].data = data.carbohydrates_data;
-        this.lineChartData['data'].labels = data.labels;
+        this.lineChartData['data'].labels = this.getLabels(data.labels);
         const now = new Date();
         const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
         const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 7);
