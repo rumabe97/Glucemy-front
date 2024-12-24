@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {SocialAuthService} from "@abacritt/angularx-social-login";
 import {Observable} from "rxjs";
 import {IUser} from "../../../shared/models/user.model";
+import {ILastGlucoseModel} from "../../../shared/models/last.glucose.model";
 
 @Injectable({
     providedIn: 'root'
@@ -22,5 +23,9 @@ export class UserService {
 
     update(user: IUser): Observable<IUser> {
         return this.http.put<IUser>(this.url + user.id + '/', user);
+    }
+
+    getLastGlucose(): Observable<ILastGlucoseModel> {
+        return this.http.get<ILastGlucoseModel>(this.url + 'get_data/glucose/');
     }
 }

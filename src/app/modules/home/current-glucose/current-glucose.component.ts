@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ILastGlucoseModel} from "../../../shared/models/last.glucose.model";
 
 @Component({
     selector: 'app-current-glucose',
@@ -6,7 +7,8 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./current-glucose.component.scss']
 })
 export class CurrentGlucoseComponent implements OnInit {
-    currentGlucose = 120;
+    @Input() glucoseData: ILastGlucoseModel;
+
 
     constructor() {
     }
@@ -14,4 +16,12 @@ export class CurrentGlucoseComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    getTime(){
+        let result = 'Last updated: ';
+        if(!this.glucoseData.time_since_creation) return 'No data';
+        if(this.glucoseData.time_since_creation.days) result = result + this.glucoseData.time_since_creation.days + ' days ';
+        if(this.glucoseData.time_since_creation.hours) result = result + this.glucoseData.time_since_creation.hours + ' hours ';
+        if(this.glucoseData.time_since_creation.minutes) result = result + this.glucoseData.time_since_creation.minutes + ' minutes ';
+        return result + 'ago';
+    }
 }

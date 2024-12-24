@@ -15,6 +15,7 @@ import {RecordsComponent} from "./modules/records/records.component";
 import {RecordsResolver} from "./core/resolvers/records/records.resolver";
 import {EditRecordComponent} from "./modules/edit-record/edit-record.component";
 import {RecordByIdResolver} from "./core/resolvers/records/record-by-id.resolver";
+import {HomeResolver} from "./core/resolvers/home/home.resolver";
 
 const routes: Routes = [
     {
@@ -32,6 +33,7 @@ const routes: Routes = [
                 path: '',
                 component: HomeComponent,
                 canActivate: [AuthGuard],
+                resolve: {response: HomeResolver}
             },
             {
                 path: 'profile',
