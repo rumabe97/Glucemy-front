@@ -9,7 +9,7 @@
             <div *ngFor="let item of data" class="record-card" (click)="navigate(item)">
                 <fa-icon [icon]="getIcon(item?.phasesDay?.name)" size="3x" class="customIcon"></fa-icon>
                 <div class="record-details">
-                    <h3>{{ item.phasesDay?.name }}</h3>
+                    <h3>{{ item.phasesDay?.name ?? 'No Phase day' }}</h3>
                     <p>{{ item.created_date | date: 'dd/MM/yyyy' }}</p>
                 </div>
             </div>

@@ -58,7 +58,13 @@ export class RecordsService {
         }, {responseType: 'blob'});
     }
 
-    findByday(day:string){
+    quickGlucose(glucose: number) {
+        return this._httpClient.post(`${this.url}quick/glucose/`, {
+            glucose,
+        });
+    }
+
+    findByDay(day: string) {
         return this._httpClient.get<any>(
             `${this.url}day/${day}/`
         );

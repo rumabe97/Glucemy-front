@@ -21,7 +21,7 @@ export class CurrentGlucoseComponent implements OnInit {
         if(!this.glucoseData.time_since_creation) return 'No data';
         if(this.glucoseData.time_since_creation.days) result = result + this.glucoseData.time_since_creation.days + ' days ';
         if(this.glucoseData.time_since_creation.hours) result = result + this.glucoseData.time_since_creation.hours + ' hours ';
-        if(this.glucoseData.time_since_creation.minutes) result = result + this.glucoseData.time_since_creation.minutes + ' minutes ';
+        if(this.glucoseData.time_since_creation.minutes != null) result = result + this.glucoseData.time_since_creation.minutes + ' minutes ';
         return result + 'ago';
     }
 }

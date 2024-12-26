@@ -5,7 +5,7 @@
             <app-current-glucose [glucoseData]="glucoseData"></app-current-glucose>
         </div>
         <div class="col-md-6">
-            <app-quick-entry></app-quick-entry>
+            <app-quick-entry (quickGlucose)="addGlucose($event)"></app-quick-entry>
         </div>
         <div class="col-12">
             <app-recent-history></app-recent-history>

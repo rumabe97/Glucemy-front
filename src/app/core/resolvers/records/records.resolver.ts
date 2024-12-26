@@ -16,6 +16,6 @@ export class RecordsResolver implements Resolve<boolean> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        return this._recordsService.findByday(this.datePipe.transform(new Date(), "yyyy-MM-dd"));
+        return this._recordsService.findByDay(this.datePipe.transform(new Date(), "yyyy-MM-dd"));
     }
 }

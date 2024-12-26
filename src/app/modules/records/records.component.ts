@@ -38,7 +38,7 @@ export class RecordsComponent implements OnInit {
     changeDate(event: Event) {
         this.date = (event.target as HTMLInputElement).value;
 
-        this._recordsService.findByday(this.datePipe.transform(new Date(this.date), "yyyy-MM-dd")).subscribe(res => {
+        this._recordsService.findByDay(this.datePipe.transform(new Date(this.date), "yyyy-MM-dd")).subscribe(res => {
             this.data = res;
         });
     }

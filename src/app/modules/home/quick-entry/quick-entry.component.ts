@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {RecordsService} from "../../../core/services/records/records.service";
 
 @Component({
     selector: 'app-quick-entry',
@@ -7,8 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class QuickEntryComponent implements OnInit {
     glucoseLevel: number | null = null;
+    @Output() quickGlucose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    constructor() {
+    constructor(private _recordService: RecordsService) {
     }
 
     ngOnInit(): void {
@@ -16,8 +18,9 @@ export class QuickEntryComponent implements OnInit {
 
     onSubmit() {
         if (this.glucoseLevel !== null) {
-            console.log('Submitted glucose level:', this.glucoseLevel);
-            // Here you would typically send this data to your backend
+            this._recordService.quickGlucose(this.glucoseLevel).subscribe(() => {
+                this.quickGlucose.emit(true);
+            })
             this.glucoseLevel = null;
         }
     }
