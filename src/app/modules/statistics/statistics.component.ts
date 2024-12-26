@@ -42,8 +42,8 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
         this.lineChartData['data'].datasets[1].data = data.carbohydrates_data;
         this.lineChartData['data'].labels = this.getLabels(data.labels);
         const now = new Date();
-        const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-        const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 7);
+        const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+        const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 7);
         this.start_date = new FormControl(startDate.toISOString().slice(0, 10));
         this.end_date = new FormControl(endDate.toISOString().slice(0, 10));
 
@@ -72,9 +72,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     }
 
     updateChart() {
-        const date = new Date(this.start_date.value);
-        const startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-        this._recordsService.charts(this.datePipe.transform(this.end_date.value, "yyyy-MM-dd"), this.datePipe.transform(startDate, "yyyy-MM-dd"))
+        this._recordsService.charts(this.datePipe.transform(this.start_date.value, "yyyy-MM-dd"), this.datePipe.transform(this.end_date.value, "yyyy-MM-dd"))
             .subscribe(res => {
                 this.lineChartData['data'].datasets[0].data = res.blood_glucose_data;
                 this.lineChartData['data'].datasets[1].data = res.carbohydrates_data;

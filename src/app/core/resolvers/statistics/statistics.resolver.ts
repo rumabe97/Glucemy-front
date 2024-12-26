@@ -17,9 +17,9 @@ export class StatisticsResolver implements Resolve<boolean> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         const now = new Date();
-        const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-        const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 7);
+        const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+        const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 7);
 
-        return this._recordsService.charts(this.datePipe.transform(endDate, "yyyy-MM-dd"), this.datePipe.transform(startDate, "yyyy-MM-dd"));
+        return this._recordsService.charts(this.datePipe.transform(startDate, "yyyy-MM-dd"), this.datePipe.transform(endDate, "yyyy-MM-dd"));
     }
 }
