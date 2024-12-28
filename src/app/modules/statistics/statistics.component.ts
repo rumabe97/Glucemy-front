@@ -76,7 +76,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
             .subscribe(res => {
                 this.lineChartData['data'].datasets[0].data = res.blood_glucose_data;
                 this.lineChartData['data'].datasets[1].data = res.carbohydrates_data;
-                this.lineChartData['data'].labels = res.labels;
+                this.lineChartData['data'].labels = this.getLabels(res.labels);
                 this.chartConfig.update();
             })
     }
